@@ -22,7 +22,8 @@ VIDEO_CODE : https://youtu.be/VIDEO_ID
 - S1 05C : https://youtu.be/IMxciGKEvDc (The Final Letters)
 - S1 05D : https://youtu.be/69s1dUHgjoc (Decoding Sanskrit Consonants)
 - S1 06A : https://youtu.be/kYrIxYSZJ1M (Sanskrit Your First Words)
-- S1 06B : https://youtu.be/40Pi086jibo (Sanskrit Reading Power Up) 
+- S1 06B : https://youtu.be/40Pi086jibo (Sanskrit Reading Power Up)
+- S1 GUIDE : https://youtu.be/ (Sanskrit Letters Guide — All Letters, Matras & Tricks) 
 
 ### Marathi
 - M1-01 : 
