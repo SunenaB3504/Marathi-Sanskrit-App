@@ -12,11 +12,17 @@ VIDEO_CODE : https://youtu.be/VIDEO_ID
 ## PHASE 1 — Sounds & Alphabets (13 videos)
 
 ### Sanskrit
-- S1-01 : https://youtu.be/zugOABVMq1A ✅
-- S1-02 : 
-- S1-03 : 
-- S1-04 : 
-- S1-05 : 
+- S1 00D : https://youtu.be/ (Why Sanskrit Your Secret Superpower)
+- S1 01 : https://youtu.be/zugOABVMq1A ✅ (The Devanagari Story)
+- S1 02 : https://youtu.be/ (Sanskrit Vowels Part 1)
+- S1 03 : https://youtu.be/ (Sanskrit Vowel Family)
+- S1 03C : https://youtu.be/ (The Final Letters)
+- S1 04A : https://youtu.be/ (Sanskrit Vowels Final Challenge)
+- S1 05A : https://youtu.be/ (Sanskrit Consonants Part 1)
+- S1 05B : https://youtu.be/ (Sanskrit Consonants Part 2)
+- S1 05D : https://youtu.be/ (Decoding Sanskrit Consonants)
+- S1 06A : https://youtu.be/ (Sanskrit Your First Words)
+- S1 06B : https://youtu.be/ (Sanskrit Reading Power Up) 
 
 ### Marathi
 - M1-01 : 
