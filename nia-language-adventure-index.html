@@ -1086,6 +1086,7 @@ const VIDEOS = [
   {id:"M2-05",phase:2,track:"M",title:"Marathi — Festivals & Maharashtra Culture (सण)",yt:"SrdJzPspNis",dev:"सण"},
   {id:"M2-06",phase:2,track:"M",title:"Marathi — Daily Life & Action Words",yt:"GalJxuqrCcY",dev:"क्रिया"},
   {id:"M2-07",phase:2,track:"M",title:"Marathi — Feelings, Weather & Nature",yt:"fo0_9mGwm-I",dev:"भावना"},
+  {id:"M2-GUIDE",phase:2,track:"M",title:"Marathi Vocabulary Guide — All Phase 2 Words (समिवऊन)",yt:"",dev:"समिवऊन"},
   // PHASE 2 — BRIDGE
   {id:"B2-01",phase:2,track:"B",title:"Word Detectives — When Sanskrit Became Marathi",yt:"bK7m5mBr5EU",dev:"सेतु"},
   {id:"B2-02",phase:2,track:"B",title:"Fun Compare — Same Concept, Two Languages",yt:"SDVyzAc5He4",dev:"तुलना"},
@@ -1157,7 +1158,7 @@ function makeCard(v, compact=false) {
   const tc = trackClass(v.track);
   const isPlaying = currentVideo && currentVideo.id === v.id;
   const isGuide = v.id.includes('GUIDE');
-  const guideFile = v.id === 'S1-GUIDE' ? 's1-guide.html' : v.id === 'M1-GUIDE' ? 'm1-guide.html' : v.id === 'S2-GUIDE' ? 's2-guide.html' : '';
+  const guideFile = v.id === 'S1-GUIDE' ? 's1-guide.html' : v.id === 'M1-GUIDE' ? 'm1-guide.html' : v.id === 'S2-GUIDE' ? 's2-guide.html' : v.id === 'M2-GUIDE' ? 'm2-guide.html' : '';
 
   return `
   <div class="video-card ${done?'completed':''} ${isPlaying?'playing':''}" id="card-${v.id}">

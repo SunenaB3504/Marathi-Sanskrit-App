@@ -60,6 +60,7 @@ VIDEO_CODE : https://youtu.be/VIDEO_ID
 - M2-05 : https://youtu.be/SrdJzPspNis
 - M2-06 : https://youtu.be/GalJxuqrCcY
 - M2-07 : https://youtu.be/fo0_9mGwm-I
+- M2 GUIDE : 📖 Reference Guide (Not a video - Opens interactive reference guide with 7 thematic sections & 100+ words)
 
 ### Bridge
 - B2-01 : https://youtu.be/bK7m5mBr5EU
