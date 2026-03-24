@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nia's Language Adventure 🌟</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --saffron: #FF6B1A;
+  --gold: #FFB830;
+  --teal: #00B4A6;
+  --purple: #7C3AED;
+  --pink: #F43F8E;
+  --sky: #0EA5E9;
+  --green: #22C55E;
+  --cream: #FFF8F0;
+  --dark: #1E1040;
+  --card-bg: #ffffff;
+  --shadow: 0 8px 32px rgba(124,58,237,0.13);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--cream);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* === STARFIELD BG === */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 10% 10%, rgba(255,184,48,0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 80%, rgba(0,180,166,0.10) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(124,58,237,0.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* === HEADER === */
+header {
+  position: relative;
+  z-index: 10;
+  background: linear-gradient(135deg, var(--purple) 0%, #4F1DA3 50%, var(--dark) 100%);
+  padding: 0;
+  overflow: hidden;
+}
+
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 24px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo-circle {
+  width: 72px; height: 72px;
+  background: linear-gradient(135deg, var(--gold), var(--saffron));
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 36px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 20px rgba(255,184,48,0.4);
+  animation: floatLogo 3s ease-in-out infinite;
+}
+
+@keyframes floatLogo {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.header-text h1 {
+  font-family: 'Baloo 2', cursive;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+}
+
+.header-text h1 span { color: var(--gold); }
+
+.header-text p {
+  color: rgba(255,255,255,0.75);
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
+.header-stars {
+  margin-left: auto;
+  display: flex; gap: 6px; align-items: center;
+}
+
+.star-badge {
+  background: rgba(255,184,48,0.2);
+  border: 2px solid var(--gold);
+  border-radius: 20px;
+  padding: 6px 14px;
+  color: var(--gold);
+  font-family: 'Baloo 2', cursive;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* === PROGRESS BAR === */
+.progress-banner {
+  background: rgba(0,0,0,0.25);
+  padding: 12px 24px;
+  display: flex; align-items: center; gap: 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.progress-label {
+  color: rgba(255,255,255,0.8);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.progress-track {
+  flex: 1;
+  height: 10px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--saffron));
+  border-radius: 10px;
+  transition: width 0.6s ease;
+}
+
+.progress-pct {
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+/* === NAV TABS === */
+.nav-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--dark);
+  padding: 0 24px;
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav-tabs::-webkit-scrollbar { display: none; }
+
+.nav-tab {
+  padding: 14px 20px;
+  border: none;
+  background: transparent;
+  color: rgba(255,255,255,0.5);
+  font-family: 'Baloo 2', cursive;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+  display: flex; align-items: center; gap: 8px;
+}
+
+.nav-tab:hover { color: rgba(255,255,255,0.85); }
+
+.nav-tab.active {
+  color: #fff;
+  border-bottom-color: var(--gold);
+}
+
+.nav-tab .tab-emoji { font-size: 1.1rem; }
+
+/* === MAIN CONTENT === */
+main {
+  position: relative;
+  z-index: 5;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 20px 60px;
+}
+
+/* === PHASE SECTION === */
+.phase-section { display: none; }
+.phase-section.active { display: block; }
+
+.phase-header {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 24px;
+}
+
+.phase-badge {
+  width: 56px; height: 56px;
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.phase-info h2 {
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--dark);
+}
+
+.phase-info p {
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 2px;
+}
+
+.phase-progress-row {
+  display: flex; align-items: center; gap: 10px;
+  margin-top: 6px;
+}
+
+.phase-prog-track {
+  flex: 1; max-width: 200px;
+  height: 7px;
+  background: #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.phase-prog-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.5s;
+}
+
+.phase-prog-txt {
+  font-size: 0.8rem;
+  color: #888;
+  font-weight: 600;
+}
+
+/* === VIDEO GRID === */
+.track-label {
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 20px 0 12px;
+  display: flex; align-items: center; gap: 8px;
+  color: var(--dark);
+}
+
+.track-label::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, currentColor, transparent);
+  opacity: 0.2;
+  margin-left: 8px;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+  margin-bottom: 8px;
+}
+
+/* === VIDEO CARD === */
+.video-card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.25s, box-shadow 0.25s;
+  cursor: pointer;
+  border: 2px solid transparent;
+  position: relative;
+}
+
+.video-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(124,58,237,0.18);
+}
+
+.video-card.completed {
+  border-color: var(--green);
+}
+
+.video-card.playing {
+  border-color: var(--saffron);
+  box-shadow: 0 0 0 3px rgba(255,107,26,0.25), var(--shadow);
+}
+
+/* Thumbnail */
+.card-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: linear-gradient(135deg, #1e1040 0%, #3b1f7a 100%);
+  overflow: hidden;
+}
+
+.card-thumb iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  border: none;
+}
+
+.thumb-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.thumb-placeholder .play-icon {
+  width: 48px; height: 48px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  border: 2px solid rgba(255,255,255,0.3);
+}
+
+.thumb-placeholder .vid-code {
+  font-family: 'Baloo 2', cursive;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 1px;
+}
+
+.thumb-devanagari {
+  position: absolute;
+  bottom: 8px; right: 10px;
+  font-size: 2rem;
+  color: rgba(255,255,255,0.12);
+  font-family: serif;
+  line-height: 1;
+}
+
+.completed-ribbon {
+  position: absolute;
+  top: 10px; right: 10px;
+  background: var(--green);
+  color: #fff;
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: flex; align-items: center; gap: 4px;
+}
+
+.playing-ribbon {
+  position: absolute;
+  top: 10px; left: 10px;
+  background: var(--saffron);
+  color: #fff;
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* Card body */
+.card-body {
+  padding: 14px 16px 16px;
+}
+
+.card-meta {
+  display: flex; align-items: center; gap: 6px;
+  margin-bottom: 6px;
+}
+
+.card-code {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-family: 'Baloo 2', cursive;
+}
+
+.card-track-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.card-title {
+  font-family: 'Baloo 2', cursive;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--dark);
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+
+.card-footer {
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.card-duration {
+  font-size: 0.78rem;
+  color: #aaa;
+  display: flex; align-items: center; gap: 4px;
+}
+
+.card-actions {
+  display: flex; gap: 6px;
+}
+
+.btn-watch {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: none;
+  font-family: 'Baloo 2', cursive;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-done {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+  background: transparent;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px;
+  transition: all 0.2s;
+  color: #ccc;
+}
+
+.btn-done:hover { border-color: var(--green); color: var(--green); }
+.btn-done.marked { background: var(--green); border-color: var(--green); color: #fff; }
+
+/* === VIDEO MODAL === */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10,5,30,0.85);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(6px);
+}
+
+.modal-overlay.open { display: flex; }
+
+.modal-box {
+  background: var(--dark);
+  border-radius: 24px;
+  width: 100%;
+  max-width: 780px;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+  animation: modalIn 0.3s cubic-bezier(.34,1.4,.64,1);
+}
+
+@keyframes modalIn {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-video {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #000;
+}
+
+.modal-video iframe {
+  width: 100%; height: 100%;
+  border: none;
+}
+
+.modal-info {
+  padding: 20px 24px;
+}
+
+.modal-code-row {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 8px;
+}
+
+.modal-code {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 8px;
+  font-family: 'Baloo 2', cursive;
+}
+
+.modal-title {
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 14px;
+  line-height: 1.3;
+}
+
+.modal-actions {
+  display: flex; gap: 10px; flex-wrap: wrap;
+}
+
+.btn-modal-done {
+  padding: 10px 24px;
+  border-radius: 24px;
+  border: none;
+  background: var(--green);
+  color: #fff;
+  font-family: 'Baloo 2', cursive;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex; align-items: center; gap: 6px;
+}
+
+.btn-modal-done:hover { transform: scale(1.04); }
+.btn-modal-done.already { background: #374151; }
+
+.btn-modal-close {
+  padding: 10px 20px;
+  border-radius: 24px;
+  border: 2px solid rgba(255,255,255,0.15);
+  background: transparent;
+  color: rgba(255,255,255,0.6);
+  font-family: 'Baloo 2', cursive;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-left: auto;
+}
+
+.btn-modal-close:hover { border-color: rgba(255,255,255,0.4); color: #fff; }
+
+/* === HOME / ALL VIEW === */
+.home-hero {
+  text-align: center;
+  padding: 20px 0 32px;
+}
+
+.home-hero h2 {
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 6px;
+}
+
+.home-hero p {
+  color: #666;
+  font-size: 1rem;
+  max-width: 500px;
+  margin: 0 auto 24px;
+}
+
+.stat-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 18px 16px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.stat-card .stat-num {
+  font-family: 'Baloo 2', cursive;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.stat-card .stat-lbl {
+  font-size: 0.8rem;
+  color: #888;
+  font-weight: 600;
+}
+
+/* === TRACK COLORS === */
+.track-sanskrit { --tc: #FF6B1A; --tl: #FFF3EE; }
+.track-marathi  { --tc: #00B4A6; --tl: #EEFAF9; }
+.track-bridge   { --tc: #7C3AED; --tl: #F3EEFF; }
+
+.card-code.track-sanskrit { background: #FFF3EE; color: var(--saffron); }
+.card-code.track-marathi  { background: #EEFAF9; color: var(--teal); }
+.card-code.track-bridge   { background: #F3EEFF; color: var(--purple); }
+
+.card-track-dot.track-sanskrit { background: var(--saffron); }
+.card-track-dot.track-marathi  { background: var(--teal); }
+.card-track-dot.track-bridge   { background: var(--purple); }
+
+.btn-watch.track-sanskrit { background: var(--saffron); color: #fff; }
+.btn-watch.track-marathi  { background: var(--teal); color: #fff; }
+.btn-watch.track-bridge   { background: var(--purple); color: #fff; }
+
+.btn-watch.track-sanskrit:hover { background: #e05510; }
+.btn-watch.track-marathi:hover  { background: #009e91; }
+.btn-watch.track-bridge:hover   { background: #6b2bd6; }
+
+.modal-code.track-sanskrit { background: #FFF3EE; color: var(--saffron); }
+.modal-code.track-marathi  { background: #EEFAF9; color: var(--teal); }
+.modal-code.track-bridge   { background: #F3EEFF; color: var(--purple); }
+
+/* PHASE badge colors */
+.phase-badge.p1 { background: #FEF3C7; }
+.phase-badge.p2 { background: #DBEAFE; }
+.phase-badge.p3 { background: #D1FAE5; }
+.phase-badge.p4 { background: #FCE7F3; }
+
+.phase-prog-fill.p1 { background: var(--gold); }
+.phase-prog-fill.p2 { background: var(--sky); }
+.phase-prog-fill.p3 { background: var(--green); }
+.phase-prog-fill.p4 { background: var(--pink); }
+
+/* === EMPTY STATE === */
+.add-video-hint {
+  background: #fff;
+  border: 2px dashed #ddd;
+  border-radius: 16px;
+  padding: 28px;
+  text-align: center;
+  color: #aaa;
+  font-size: 0.9rem;
+  margin-top: 8px;
+}
+
+.add-video-hint code {
+  background: #f3f4f6;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  color: var(--purple);
+}
+
+/* === CONFETTI === */
+.confetti-piece {
+  position: fixed;
+  width: 10px; height: 10px;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 9999;
+  animation: confettiFall 1.2s ease-out forwards;
+}
+
+@keyframes confettiFall {
+  0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 600px) {
+  .header-inner { padding: 20px 16px 16px; }
+  .header-text h1 { font-size: 1.4rem; }
+  .logo-circle { width: 54px; height: 54px; font-size: 26px; }
+  .header-stars { display: none; }
+  main { padding: 20px 14px 60px; }
+  .video-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .stat-cards { grid-template-columns: 1fr 1fr; }
+  .modal-box { border-radius: 16px; }
+  .modal-info { padding: 14px 16px; }
+}
+
+@media (max-width: 400px) {
+  .video-grid { grid-template-columns: 1fr; }
+}
+
+/* Search bar */
+.search-row {
+  display: flex; gap: 10px;
+  margin-bottom: 24px;
+}
+
+.search-box {
+  flex: 1;
+  padding: 12px 18px;
+  border-radius: 40px;
+  border: 2px solid #e5e7eb;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+  background: #fff;
+}
+
+.search-box:focus { border-color: var(--purple); }
+
+.filter-btn {
+  padding: 10px 18px;
+  border-radius: 40px;
+  border: 2px solid #e5e7eb;
+  background: #fff;
+  font-family: 'Baloo 2', cursive;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #666;
+}
+
+.filter-btn.active { background: var(--purple); color: #fff; border-color: var(--purple); }
+
+/* Tooltip for adding YouTube URL */
+.youtube-input-row {
+  display: flex; gap: 8px;
+  padding: 10px 16px;
+  background: #f9fafb;
+  border-top: 1px solid #f0f0f0;
+}
+
+.yt-input {
+  flex: 1;
+  padding: 7px 12px;
+  border-radius: 10px;
+  border: 1.5px solid #e5e7eb;
+  font-size: 0.8rem;
+  font-family: 'Nunito', sans-serif;
+  outline: none;
+}
+
+.yt-input:focus { border-color: var(--purple); }
+
+.btn-yt-save {
+  padding: 7px 14px;
+  border-radius: 10px;
+  border: none;
+  background: var(--purple);
+  color: #fff;
+  font-family: 'Baloo 2', cursive;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.yt-saved-badge {
+  position: absolute;
+  bottom: 6px; left: 6px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  font-size: 0.65rem;
+  padding: 2px 7px;
+  border-radius: 6px;
+  display: flex; align-items: center; gap: 3px;
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="logo-circle">🌟</div>
+    <div class="header-text">
+      <h1>Nia's <span>Language</span> Adventure</h1>
+      <p>Sanskrit · Marathi · Class 5 CBSE · 57 Videos</p>
+    </div>
+    <div class="header-stars">
+      <div class="star-badge">⭐ <span id="starCount">0</span> Stars</div>
+    </div>
+  </div>
+  <div class="progress-banner" style="padding-bottom:16px">
+    <span class="progress-label">Overall Progress</span>
+    <div class="progress-track">
+      <div class="progress-fill" id="globalFill" style="width:0%"></div>
+    </div>
+    <span class="progress-pct" id="globalPct">0 / 57</span>
+  </div>
+</header>
+
+<!-- NAV TABS -->
+<nav class="nav-tabs">
+  <button class="nav-tab active" onclick="showTab('home')" id="tab-home">
+    <span class="tab-emoji">🏠</span> Home
+  </button>
+  <button class="nav-tab" onclick="showTab('p1')" id="tab-p1">
+    <span class="tab-emoji">🔤</span> Phase 1
+  </button>
+  <button class="nav-tab" onclick="showTab('p2')" id="tab-p2">
+    <span class="tab-emoji">📚</span> Phase 2
+  </button>
+  <button class="nav-tab" onclick="showTab('p3')" id="tab-p3">
+    <span class="tab-emoji">✍️</span> Phase 3
+  </button>
+  <button class="nav-tab" onclick="showTab('p4')" id="tab-p4">
+    <span class="tab-emoji">📖</span> Phase 4
+  </button>
+  <button class="nav-tab" onclick="showTab('all')" id="tab-all">
+    <span class="tab-emoji">🔍</span> All Videos
+  </button>
+</nav>
+
+<!-- MAIN -->
+<main>
+
+  <!-- HOME -->
+  <section class="phase-section active" id="sec-home">
+    <div class="home-hero">
+      <h2>Welcome back, Nia! 👋</h2>
+      <p>Pick up where you left off or explore a new phase of your adventure!</p>
+    </div>
+    <div class="stat-cards">
+      <div class="stat-card">
+        <div class="stat-num" style="color:var(--saffron)" id="statDone">0</div>
+        <div class="stat-lbl">Videos Done</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="color:var(--purple)" id="statLeft">57</div>
+        <div class="stat-lbl">To Go</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="color:var(--teal)" id="statS">0</div>
+        <div class="stat-lbl">Sanskrit ✓</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="color:var(--green)" id="statM">0</div>
+        <div class="stat-lbl">Marathi ✓</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="color:var(--pink)" id="statB">0</div>
+        <div class="stat-lbl">Bridge ✓</div>
+      </div>
+    </div>
+    <div class="track-label" style="color:var(--dark)">▶ Continue Watching</div>
+    <div class="video-grid" id="continueGrid"></div>
+  </section>
+
+  <!-- PHASE 1 -->
+  <section class="phase-section" id="sec-p1">
+    <div class="phase-header">
+      <div class="phase-badge p1">🔤</div>
+      <div class="phase-info">
+        <h2>Phase 1 — Sounds &amp; Alphabets</h2>
+        <p>Vowels · Consonants · Devanagari Script · First Words</p>
+        <div class="phase-progress-row">
+          <div class="phase-prog-track"><div class="phase-prog-fill p1" id="p1fill" style="width:0%"></div></div>
+          <span class="phase-prog-txt" id="p1txt">0 / 13</span>
+        </div>
+      </div>
+    </div>
+    <div class="track-label" style="color:var(--saffron)">🪷 Sanskrit</div>
+    <div class="video-grid" id="grid-p1-s"></div>
+    <div class="track-label" style="color:var(--teal)">🌿 Marathi</div>
+    <div class="video-grid" id="grid-p1-m"></div>
+    <div class="track-label" style="color:var(--purple)">🌉 Bridge</div>
+    <div class="video-grid" id="grid-p1-b"></div>
+  </section>
+
+  <!-- PHASE 2 -->
+  <section class="phase-section" id="sec-p2">
+    <div class="phase-header">
+      <div class="phase-badge p2">📚</div>
+      <div class="phase-info">
+        <h2>Phase 2 — Words &amp; Vocabulary</h2>
+        <p>Body · Nature · Numbers · Animals · Colours · Food · Family</p>
+        <div class="phase-progress-row">
+          <div class="phase-prog-track"><div class="phase-prog-fill p2" id="p2fill" style="width:0%"></div></div>
+          <span class="phase-prog-txt" id="p2txt">0 / 17</span>
+        </div>
+      </div>
+    </div>
+    <div class="track-label" style="color:var(--saffron)">🪷 Sanskrit</div>
+    <div class="video-grid" id="grid-p2-s"></div>
+    <div class="track-label" style="color:var(--teal)">🌿 Marathi</div>
+    <div class="video-grid" id="grid-p2-m"></div>
+    <div class="track-label" style="color:var(--purple)">🌉 Bridge</div>
+    <div class="video-grid" id="grid-p2-b"></div>
+  </section>
+
+  <!-- PHASE 3 -->
+  <section class="phase-section" id="sec-p3">
+    <div class="phase-header">
+      <div class="phase-badge p3">✍️</div>
+      <div class="phase-info">
+        <h2>Phase 3 — Sentences &amp; Grammar</h2>
+        <p>Cases · Verbs · Questions · Shlokas · Sandhi · Tenses</p>
+        <div class="phase-progress-row">
+          <div class="phase-prog-track"><div class="phase-prog-fill p3" id="p3fill" style="width:0%"></div></div>
+          <span class="phase-prog-txt" id="p3txt">0 / 14</span>
+        </div>
+      </div>
+    </div>
+    <div class="track-label" style="color:var(--saffron)">🪷 Sanskrit</div>
+    <div class="video-grid" id="grid-p3-s"></div>
+    <div class="track-label" style="color:var(--teal)">🌿 Marathi</div>
+    <div class="video-grid" id="grid-p3-m"></div>
+    <div class="track-label" style="color:var(--purple)">🌉 Bridge</div>
+    <div class="video-grid" id="grid-p3-b"></div>
+  </section>
+
+  <!-- PHASE 4 -->
+  <section class="phase-section" id="sec-p4">
+    <div class="phase-header">
+      <div class="phase-badge p4">📖</div>
+      <div class="phase-info">
+        <h2>Phase 4 — Stories &amp; Culture</h2>
+        <p>Panchatantra · Folk Tales · Saints · Songs · Mythology</p>
+        <div class="phase-progress-row">
+          <div class="phase-prog-track"><div class="phase-prog-fill p4" id="p4fill" style="width:0%"></div></div>
+          <span class="phase-prog-txt" id="p4txt">0 / 13</span>
+        </div>
+      </div>
+    </div>
+    <div class="track-label" style="color:var(--saffron)">🪷 Sanskrit</div>
+    <div class="video-grid" id="grid-p4-s"></div>
+    <div class="track-label" style="color:var(--teal)">🌿 Marathi</div>
+    <div class="video-grid" id="grid-p4-m"></div>
+    <div class="track-label" style="color:var(--purple)">🌉 Bridge</div>
+    <div class="video-grid" id="grid-p4-b"></div>
+  </section>
+
+  <!-- ALL VIDEOS -->
+  <section class="phase-section" id="sec-all">
+    <div class="search-row">
+      <input class="search-box" type="text" placeholder="🔍 Search any video..." id="searchBox" oninput="filterVideos()">
+      <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
+      <button class="filter-btn" onclick="setFilter('S',this)">🪷 Sanskrit</button>
+      <button class="filter-btn" onclick="setFilter('M',this)">🌿 Marathi</button>
+      <button class="filter-btn" onclick="setFilter('B',this)">🌉 Bridge</button>
+    </div>
+    <div class="video-grid" id="grid-all"></div>
+  </section>
+
+</main>
+
+<!-- VIDEO MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModalOnBg(event)">
+  <div class="modal-box">
+    <div class="modal-video" id="modalVideoWrap">
+      <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#111;color:#555;font-size:0.9rem;font-family:'Nunito',sans-serif;">
+        Add YouTube link below to watch here
+      </div>
+    </div>
+    <div class="modal-info">
+      <div class="modal-code-row">
+        <span class="modal-code" id="modalCode"></span>
+        <span style="color:#666;font-size:0.8rem" id="modalPhase"></span>
+      </div>
+      <div class="modal-title" id="modalTitle"></div>
+      <div class="modal-actions">
+        <button class="btn-modal-done" id="modalDoneBtn" onclick="toggleDoneFromModal()">
+          ✓ Mark as Done
+        </button>
+        <button class="btn-modal-close" onclick="closeModal()">✕ Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// =============================================
+// DATA — All 57 videos
+// Add your YouTube video ID in the "yt" field
+// Example: "yt": "dQw4w9WgXcQ"
+// Leave "yt": "" if not uploaded yet
+// =============================================
+const VIDEOS = [
+  // PHASE 1 — SANSKRIT
+  {id:"S1-01",phase:1,track:"S",title:"Sanskrit Introduction & The Devanagari Story",yt:"",dev:"संस्कृत"},
+  {id:"S1-02",phase:1,track:"S",title:"All Vowels — The Heartbeat of Sanskrit",yt:"",dev:"स्वर"},
+  {id:"S1-03",phase:1,track:"S",title:"All Consonants, Semi-Vowels, Sibilants & Aspirate",yt:"",dev:"व्यञ्जन"},
+  {id:"S1-04",phase:1,track:"S",title:"Writing Practice — Matras & Reading First Words",yt:"",dev:"मात्रा"},
+  {id:"S1-05",phase:1,track:"S",title:"Matras Practice — Reading & Writing Reinforcement",yt:"",dev:"अभ्यास"},
+  // PHASE 1 — MARATHI
+  {id:"M1-01",phase:1,track:"M",title:"Marathi Introduction — Language of Maharashtra",yt:"",dev:"मराठी"},
+  {id:"M1-02",phase:1,track:"M",title:"Marathi Vowels — Same Family, New Personality",yt:"",dev:"स्वर"},
+  {id:"M1-03",phase:1,track:"M",title:"Marathi Consonants & The Special Letter ळ",yt:"",dev:"ळ"},
+  {id:"M1-04",phase:1,track:"M",title:"Marathi Reading Practice — Words & First Sentences",yt:"",dev:"वाचन"},
+  {id:"M1-05",phase:1,track:"M",title:"Marathi Script Nuances — How It Differs",yt:"",dev:"लिपी"},
+  // PHASE 1 — BRIDGE
+  {id:"B1-01",phase:1,track:"B",title:"One Script, Two Languages — Devanagari Connects",yt:"",dev:"सेतु"},
+  {id:"B1-02",phase:1,track:"B",title:"Quiz & Celebration — I Know the Alphabet!",yt:"",dev:"उत्सव"},
+  // PHASE 2 — SANSKRIT
+  {id:"S2-01",phase:2,track:"S",title:"Sanskrit — The Human Body (शरीरम्)",yt:"",dev:"शरीरम्"},
+  {id:"S2-02",phase:2,track:"S",title:"Sanskrit — Nature & The World (प्रकृतिः)",yt:"",dev:"प्रकृति"},
+  {id:"S2-03",phase:2,track:"S",title:"Sanskrit — Numbers 1 to 20 (संख्याः)",yt:"",dev:"संख्या"},
+  {id:"S2-03B",phase:2,track:"S",title:"Sanskrit — Numbers: Tens, Hundreds & Thousands",yt:"",dev:"शतम्"},
+  {id:"S2-04",phase:2,track:"S",title:"Sanskrit — Animals & Birds",yt:"",dev:"पशु"},
+  {id:"S2-05",phase:2,track:"S",title:"Sanskrit — Colours & Adjectives (वर्णाः)",yt:"",dev:"वर्ण"},
+  {id:"S2-06",phase:2,track:"S",title:"Sanskrit — Food & Daily Life (अन्नम्)",yt:"",dev:"अन्न"},
+  {id:"S2-07",phase:2,track:"S",title:"Sanskrit — Family & Relationships (परिवारः)",yt:"",dev:"परिवार"},
+  // PHASE 2 — MARATHI
+  {id:"M2-01",phase:2,track:"M",title:"Marathi — Home & Family (घर आणि परिवार)",yt:"",dev:"घर"},
+  {id:"M2-02",phase:2,track:"M",title:"Marathi — School Life (शाळा)",yt:"",dev:"शाळा"},
+  {id:"M2-03",phase:2,track:"M",title:"Marathi — Food & The Maharashtra Kitchen",yt:"",dev:"जेवण"},
+  {id:"M2-04",phase:2,track:"M",title:"Marathi — Colours, Numbers & Telling Time",yt:"",dev:"रंग"},
+  {id:"M2-05",phase:2,track:"M",title:"Marathi — Festivals & Maharashtra Culture (सण)",yt:"",dev:"सण"},
+  {id:"M2-06",phase:2,track:"M",title:"Marathi — Daily Life & Action Words",yt:"",dev:"क्रिया"},
+  {id:"M2-07",phase:2,track:"M",title:"Marathi — Feelings, Weather & Nature",yt:"",dev:"भावना"},
+  // PHASE 2 — BRIDGE
+  {id:"B2-01",phase:2,track:"B",title:"Word Detectives — When Sanskrit Became Marathi",yt:"",dev:"सेतु"},
+  {id:"B2-02",phase:2,track:"B",title:"Fun Compare — Same Concept, Two Languages",yt:"",dev:"तुलना"},
+  {id:"B2-03",phase:2,track:"B",title:"Sanskrit Roots Hidden in English!",yt:"",dev:"मूल"},
+  // PHASE 3 — SANSKRIT
+  {id:"S3-01",phase:3,track:"S",title:"Sanskrit Grammar — How Sentences Work (Cases)",yt:"",dev:"कारक"},
+  {id:"S3-02",phase:3,track:"S",title:"Sanskrit Grammar — Verbs & Present Tense",yt:"",dev:"क्रिया"},
+  {id:"S3-03",phase:3,track:"S",title:"Sanskrit — Simple Sentences & Questions",yt:"",dev:"प्रश्न"},
+  {id:"S3-04",phase:3,track:"S",title:"Sanskrit — Shlokas Decoded Part 1",yt:"",dev:"श्लोक"},
+  {id:"S3-05",phase:3,track:"S",title:"Sanskrit — Shlokas Decoded Part 2 & Subhashitas",yt:"",dev:"सुभाषित"},
+  {id:"S3-06",phase:3,track:"S",title:"Sanskrit — Sandhi (The Art of Sound Joining)",yt:"",dev:"सन्धि"},
+  // PHASE 3 — MARATHI
+  {id:"M3-01",phase:3,track:"M",title:"Marathi Grammar — How Sentences Are Built",yt:"",dev:"वाक्य"},
+  {id:"M3-02",phase:3,track:"M",title:"Marathi Grammar — Verbs: Past, Present & Future",yt:"",dev:"काळ"},
+  {id:"M3-03",phase:3,track:"M",title:"Marathi — Asking Questions & Conversations",yt:"",dev:"प्रश्न"},
+  {id:"M3-04",phase:3,track:"M",title:"Marathi — Expressing Opinions, Needs & Feelings",yt:"",dev:"भावना"},
+  {id:"M3-05",phase:3,track:"M",title:"Marathi — Negation, Commands & Polite Requests",yt:"",dev:"नाही"},
+  {id:"M3-06",phase:3,track:"M",title:"Marathi — A Day in Nia's Life (Full Sentences)",yt:"",dev:"दिनक्रम"},
+  // PHASE 3 — BRIDGE
+  {id:"B3-01",phase:3,track:"B",title:"A Day in Both Languages — Side by Side",yt:"",dev:"सेतु"},
+  {id:"B3-02",phase:3,track:"B",title:"Grammar Detective — Shared Structures",yt:"",dev:"व्याकरण"},
+  // PHASE 4 — SANSKRIT
+  {id:"S4-01",phase:4,track:"S",title:"Sanskrit Story — Panchatantra: Crow & Pitcher",yt:"",dev:"काक"},
+  {id:"S4-02",phase:4,track:"S",title:"Sanskrit Story — Panchatantra: Monkey & Crocodile",yt:"",dev:"वानर"},
+  {id:"S4-03",phase:4,track:"S",title:"Sanskrit Story — Panchatantra: Lion & Hare",yt:"",dev:"सिंह"},
+  {id:"S4-04",phase:4,track:"S",title:"Sanskrit — Subhashitas: Wisdom in Two Lines",yt:"",dev:"सुभाषित"},
+  {id:"S4-05",phase:4,track:"S",title:"Sanskrit — Language in Ramayana & Mahabharata",yt:"",dev:"रामायण"},
+  // PHASE 4 — MARATHI
+  {id:"M4-01",phase:4,track:"M",title:"Marathi Story — A Folk Tale from Maharashtra",yt:"",dev:"कथा"},
+  {id:"M4-02",phase:4,track:"M",title:"Marathi Story — Sant Tukaram & Dnyaneshwar",yt:"",dev:"संत"},
+  {id:"M4-03",phase:4,track:"M",title:"Marathi — Folk Songs & Lullabies (Lavani & Ovi)",yt:"",dev:"गीत"},
+  {id:"M4-04",phase:4,track:"M",title:"Marathi — Shivaji Maharaj: Language as Identity",yt:"",dev:"शिवाजी"},
+  {id:"M4-05",phase:4,track:"M",title:"Marathi — Nia Reads Aloud! (Graduation Read)",yt:"",dev:"वाचन"},
+  // PHASE 4 — BRIDGE
+  {id:"B4-01",phase:4,track:"B",title:"Stories Travel! Panchatantra & World Literature",yt:"",dev:"सेतु"},
+  {id:"B4-02",phase:4,track:"B",title:"Full Series Recap — Everything Nia Knows Now",yt:"",dev:"पुनरावलोकन"},
+  {id:"B4-03",phase:4,track:"B",title:"Grand Finale — Nia's Language Graduation! 🎓",yt:"",dev:"उत्सव"},
+];
+
+// =============================================
+// STATE
+// =============================================
+let completed = JSON.parse(localStorage.getItem('nia_done') || '[]');
+let ytLinks   = JSON.parse(localStorage.getItem('nia_yt')   || '{}');
+let currentVideo = null;
+let currentFilter = 'all';
+
+// Merge saved YT links into VIDEOS
+VIDEOS.forEach(v => { if (ytLinks[v.id]) v.yt = ytLinks[v.id]; });
+
+// =============================================
+// RENDER
+// =============================================
+function trackClass(t) {
+  return t==='S'?'track-sanskrit':t==='M'?'track-marathi':'track-bridge';
+}
+
+function trackLabel(t) {
+  return t==='S'?'Sanskrit':t==='M'?'Marathi':'Bridge';
+}
+
+function phaseLabel(p) {
+  const labels = {1:'Phase 1 · Alphabets',2:'Phase 2 · Vocabulary',3:'Phase 3 · Grammar',4:'Phase 4 · Stories'};
+  return labels[p]||'';
+}
+
+function makeCard(v, compact=false) {
+  const done = completed.includes(v.id);
+  const tc = trackClass(v.track);
+  const isPlaying = currentVideo && currentVideo.id === v.id;
+
+  return `
+  <div class="video-card ${done?'completed':''} ${isPlaying?'playing':''}" id="card-${v.id}">
+    <div class="card-thumb" style="background:linear-gradient(135deg,${thumbGrad(v.track)})">
+      ${v.yt
+        ? `<img src="https://img.youtube.com/vi/${v.yt}/mqdefault.jpg"
+               style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"
+               onerror="this.style.display='none'">`
+        : `<div class="thumb-placeholder">
+             <div class="play-icon">▶</div>
+             <div class="vid-code">${v.id}</div>
+           </div>`
+      }
+      <div class="thumb-devanagari">${v.dev||''}</div>
+      ${done?`<div class="completed-ribbon">✓ Done</div>`:''}
+      ${isPlaying?`<div class="playing-ribbon">▶ Playing</div>`:''}
+      ${v.yt?`<div class="yt-saved-badge">▶ YouTube</div>`:''}
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-code ${tc}">${v.id}</span>
+        <span class="card-track-dot ${tc}"></span>
+        <span style="font-size:0.72rem;color:#aaa">${trackLabel(v.track)}</span>
+      </div>
+      <div class="card-title">${v.title}</div>
+      <div class="card-footer">
+        <span class="card-duration">🎬 5–7 min</span>
+        <div class="card-actions">
+          <button class="btn-done ${done?'marked':''}"
+            onclick="event.stopPropagation();toggleDone('${v.id}')"
+            title="${done?'Mark undone':'Mark as done'}">
+            ${done?'✓':'○'}
+          </button>
+          <button class="btn-watch ${tc}" onclick="openModal('${v.id}')">
+            ${v.yt?'▶ Watch':'▶ Open'}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="youtube-input-row">
+      <input class="yt-input" type="text" placeholder="Paste YouTube link or ID…"
+        id="yt-${v.id}" value="${v.yt||''}"
+        onclick="event.stopPropagation()"
+        onkeydown="if(event.key==='Enter')saveYT('${v.id}')">
+      <button class="btn-yt-save" onclick="event.stopPropagation();saveYT('${v.id}')">Save</button>
+    </div>
+  </div>`;
+}
+
+function thumbGrad(t) {
+  if(t==='S') return '#7c2d00 0%, #c2410c 100%';
+  if(t==='M') return '#134e4a 0%, #0d9488 100%';
+  return '#3b0764 0%, #7c3aed 100%';
+}
+
+function renderAll() {
+  // Phase grids
+  const phases = [1,2,3,4];
+  const tracks = ['S','M','B'];
+  phases.forEach(p => {
+    tracks.forEach(t => {
+      const el = document.getElementById(`grid-p${p}-${t.toLowerCase()}`);
+      if(!el) return;
+      const vids = VIDEOS.filter(v=>v.phase===p && v.track===t);
+      el.innerHTML = vids.map(v=>makeCard(v)).join('') ||
+        `<div class="add-video-hint" style="grid-column:1/-1">
+          No ${trackLabel(t)} videos in Phase ${p} yet.
+          Add a YouTube link using the input on any card!
+        </div>`;
+    });
+  });
+
+  // All grid
+  renderAllGrid();
+
+  // Continue grid (home)
+  renderContinue();
+
+  // Stats + progress
+  updateStats();
+}
+
+function renderAllGrid() {
+  const q = document.getElementById('searchBox')?.value.toLowerCase()||'';
+  let vids = VIDEOS.filter(v => {
+    const matchTrack = currentFilter==='all' || v.track===currentFilter;
+    const matchQ = !q || v.title.toLowerCase().includes(q) || v.id.toLowerCase().includes(q);
+    return matchTrack && matchQ;
+  });
+  const el = document.getElementById('grid-all');
+  if(el) el.innerHTML = vids.map(v=>makeCard(v)).join('');
+}
+
+function renderContinue() {
+  const el = document.getElementById('continueGrid');
+  if(!el) return;
+  // Show first 3 not completed
+  const vids = VIDEOS.filter(v=>!completed.includes(v.id)).slice(0,3);
+  el.innerHTML = vids.length
+    ? vids.map(v=>makeCard(v)).join('')
+    : `<div class="add-video-hint" style="grid-column:1/-1;text-align:center;font-size:1.1rem">
+        🎉 All videos completed! You're amazing, Nia!
+       </div>`;
+}
+
+function updateStats() {
+  const done = completed.length;
+  const total = VIDEOS.length;
+  document.getElementById('globalFill').style.width = (done/total*100)+'%';
+  document.getElementById('globalPct').textContent = done+' / '+total;
+  document.getElementById('starCount').textContent = done;
+  document.getElementById('statDone').textContent = done;
+  document.getElementById('statLeft').textContent = total-done;
+  document.getElementById('statS').textContent = VIDEOS.filter(v=>v.track==='S'&&completed.includes(v.id)).length;
+  document.getElementById('statM').textContent = VIDEOS.filter(v=>v.track==='M'&&completed.includes(v.id)).length;
+  document.getElementById('statB').textContent = VIDEOS.filter(v=>v.track==='B'&&completed.includes(v.id)).length;
+
+  // Phase progress
+  [[1,13,'p1'],[2,18,'p2'],[3,14,'p3'],[4,13,'p4']].forEach(([p,tot,id])=>{
+    const pdone = VIDEOS.filter(v=>v.phase===p&&completed.includes(v.id)).length;
+    const el = document.getElementById(id+'fill');
+    const tx = document.getElementById(id+'txt');
+    if(el) el.style.width=(pdone/tot*100)+'%';
+    if(tx) tx.textContent=pdone+' / '+tot;
+  });
+}
+
+// =============================================
+// TOGGLE DONE
+// =============================================
+function toggleDone(id) {
+  if(completed.includes(id)) {
+    completed = completed.filter(x=>x!==id);
+  } else {
+    completed.push(id);
+    confetti();
+  }
+  localStorage.setItem('nia_done', JSON.stringify(completed));
+  renderAll();
+  if(currentVideo && currentVideo.id===id) updateModalDoneBtn();
+}
+
+function toggleDoneFromModal() {
+  if(!currentVideo) return;
+  toggleDone(currentVideo.id);
+}
+
+function updateModalDoneBtn() {
+  const btn = document.getElementById('modalDoneBtn');
+  if(!btn || !currentVideo) return;
+  const done = completed.includes(currentVideo.id);
+  btn.textContent = done ? '✓ Completed!' : '✓ Mark as Done';
+  btn.className = 'btn-modal-done' + (done?' already':'');
+}
+
+// =============================================
+// SAVE YOUTUBE LINK
+// =============================================
+function saveYT(id) {
+  const inp = document.getElementById('yt-'+id);
+  if(!inp) return;
+  let val = inp.value.trim();
+  // Extract video ID from full URL if needed
+  const match = val.match(/(?:v=|youtu\.be\/|embed\/)([A-Za-z0-9_-]{11})/);
+  if(match) val = match[1];
+  if(val.length === 11) {
+    // looks like a valid ID
+    ytLinks[id] = val;
+    VIDEOS.find(v=>v.id===id).yt = val;
+  } else if(val==='') {
+    delete ytLinks[id];
+    VIDEOS.find(v=>v.id===id).yt = '';
+  }
+  localStorage.setItem('nia_yt', JSON.stringify(ytLinks));
+  renderAll();
+}
+
+// =============================================
+// MODAL
+// =============================================
+function openModal(id) {
+  const v = VIDEOS.find(x=>x.id===id);
+  if(!v) return;
+  currentVideo = v;
+
+  document.getElementById('modalCode').textContent = v.id;
+  document.getElementById('modalCode').className = 'modal-code '+trackClass(v.track);
+  document.getElementById('modalPhase').textContent = phaseLabel(v.phase);
+  document.getElementById('modalTitle').textContent = v.title;
+  updateModalDoneBtn();
+
+  const wrap = document.getElementById('modalVideoWrap');
+  if(v.yt) {
+    wrap.innerHTML = `<iframe src="https://www.youtube.com/embed/${v.yt}?autoplay=1&rel=0"
+      allow="autoplay;encrypted-media" allowfullscreen></iframe>`;
+  } else {
+    wrap.innerHTML = `<div style="width:100%;height:100%;display:flex;flex-direction:column;
+      align-items:center;justify-content:center;background:#111;gap:12px;padding:24px;text-align:center">
+      <div style="font-size:3rem">🎬</div>
+      <div style="color:#aaa;font-family:'Nunito',sans-serif;font-size:0.9rem">
+        No YouTube link yet for <strong style="color:#fff">${v.id}</strong>.<br>
+        Add the link in the card below and click Save!
+      </div>
+    </div>`;
+  }
+
+  document.getElementById('modal').classList.add('open');
+  renderAll(); // re-render to show playing state
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.getElementById('modalVideoWrap').innerHTML = '';
+  currentVideo = null;
+  renderAll();
+}
+
+function closeModalOnBg(e) {
+  if(e.target === document.getElementById('modal')) closeModal();
+}
+
+// =============================================
+// TABS
+// =============================================
+function showTab(name) {
+  document.querySelectorAll('.phase-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('sec-'+name).classList.add('active');
+  document.getElementById('tab-'+name).classList.add('active');
+  if(name==='all') renderAllGrid();
+}
+
+// =============================================
+// FILTER + SEARCH
+// =============================================
+function setFilter(f, btn) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderAllGrid();
+}
+
+function filterVideos() { renderAllGrid(); }
+
+// =============================================
+// CONFETTI
+// =============================================
+function confetti() {
+  const colors = ['#FF6B1A','#FFB830','#00B4A6','#7C3AED','#F43F8E','#22C55E'];
+  for(let i=0;i<22;i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti-piece';
+    el.style.cssText = `
+      left:${Math.random()*100}vw;
+      top:0;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      width:${6+Math.random()*8}px;
+      height:${6+Math.random()*8}px;
+      border-radius:${Math.random()>0.5?'50%':'2px'};
+      animation-delay:${Math.random()*0.4}s;
+      animation-duration:${0.9+Math.random()*0.6}s;
+    `;
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(), 1800);
+  }
+}
+
+// =============================================
+// INIT
+// =============================================
+renderAll();
+</script>
+</body>
+</html>
