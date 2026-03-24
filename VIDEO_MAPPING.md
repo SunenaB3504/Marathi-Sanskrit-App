@@ -50,6 +50,7 @@ VIDEO_CODE : https://youtu.be/VIDEO_ID
 - S2-05 : https://youtu.be/gzzqjsodAfo
 - S2-06 : https://youtu.be/xlSYtgS7u4s
 - S2-07 : https://youtu.be/frKcuQ-y8ro
+- S2 GUIDE : 📖 Reference Guide (Not a video - Opens interactive reference guide with 7 vocabulary themes & 100+ words)
 
 ### Marathi
 - M2-01 : 
