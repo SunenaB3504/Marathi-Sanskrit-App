@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marathi Letters Guide | Nia's Language Adventure</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --teal: #00B4A6;
+  --dark-teal: #007A6F;
+  --gold: #FFB830;
+  --purple: #7C3AED;
+  --dark: #1E1040;
+  --cream: #FFF8F0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--cream);
+  color: var(--dark);
+  line-height: 1.6;
+}
+
+/* Header */
+header {
+  background: linear-gradient(135deg, var(--teal) 0%, var(--dark-teal) 100%);
+  color: white;
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+header h1 {
+  font-family: 'Baloo 2', cursive;
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+header p {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+/* Main Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* Section Titles */
+h2 {
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.6rem;
+  color: var(--teal);
+  margin-top: 40px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid var(--gold);
+}
+
+h3 {
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.2rem;
+  color: var(--teal);
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,180,166,0.1);
+}
+
+thead {
+  background: linear-gradient(135deg, var(--teal), var(--dark-teal));
+  color: white;
+}
+
+th {
+  padding: 16px;
+  text-align: left;
+  font-weight: 700;
+  font-family: 'Baloo 2', cursive;
+}
+
+td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+tbody tr:hover {
+  background: #e6faf9;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Marathi Text */
+.marathi {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--teal);
+  font-family: serif;
+}
+
+.example {
+  font-size: 1.1rem;
+  color: var(--dark);
+}
+
+.meaning {
+  color: #666;
+  font-style: italic;
+}
+
+/* Grid for Vowels */
+.vowel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.vowel-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,180,166,0.1);
+  border-top: 4px solid var(--teal);
+  transition: transform 0.2s;
+}
+
+.vowel-card:hover {
+  transform: translateY(-4px);
+}
+
+.vowel-card .letter {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--teal);
+  margin-bottom: 10px;
+  font-family: serif;
+}
+
+.vowel-card .roman {
+  font-weight: 600;
+  color: var(--dark-teal);
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  font-family: 'Baloo 2', cursive;
+}
+
+.vowel-card .description {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Info Box */
+.info-box {
+  background: linear-gradient(135deg, rgba(0,180,166,0.1), rgba(0,180,166,0.05));
+  border-left: 4px solid var(--teal);
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+  font-size: 0.95rem;
+}
+
+.info-box strong {
+  color: var(--dark);
+}
+
+/* Tips Section */
+.tips {
+  background: #e6faf9;
+  border-left: 4px solid var(--teal);
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.tips h4 {
+  color: var(--teal);
+  margin-bottom: 10px;
+  font-family: 'Baloo 2', cursive;
+}
+
+.tips ul {
+  margin-left: 20px;
+}
+
+.tips li {
+  margin-bottom: 8px;
+  color: #555;
+}
+
+/* Special Letter Box */
+.special-box {
+  background: linear-gradient(135deg, rgba(255,184,48,0.1), rgba(0,180,166,0.1));
+  border-left: 4px solid var(--gold);
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+  font-size: 0.95rem;
+}
+
+.special-box .letter {
+  font-size: 2.5rem;
+  color: var(--teal);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* Back Button */
+.back-button {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  background: var(--teal);
+  color: white;
+  text-decoration: none;
+  border-radius: 24px;
+  font-family: 'Baloo 2', cursive;
+  font-weight: 700;
+  transition: all 0.2s;
+}
+
+.back-button:hover {
+  background: var(--dark-teal);
+  transform: translateX(-4px);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 30px 20px;
+  background: var(--dark);
+  color: white;
+  margin-top: 60px;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  header h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.3rem; }
+  .vowel-grid { grid-template-columns: 1fr 1fr; }
+  table { font-size: 0.9rem; }
+  th, td { padding: 10px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📖 Marathi Letters Guide</h1>
+  <p>Complete reference for letters, matras, and combined letters</p>
+</header>
+
+<div class="container">
+  <a href="nia-language-adventure-index.html" class="back-button">← Back to App</a>
+
+  <!-- INTRODUCTION -->
+  <div class="info-box">
+    <strong>Welcome to the Marathi Letters Reference Guide!</strong>
+    <br><br>
+    This guide provides a complete overview of all Marathi letters, vowel marks (matras), and combined letters with examples. Marathi uses the Devanagari script but has its own unique characteristics. Use this as a quick reference while learning!
+  </div>
+
+  <!-- VOWELS (SWARA) -->
+  <h2>🔤 Vowels (स्वराः — Swar)</h2>
+  <p>Vowels are the foundation of Marathi. They can stand alone and make complete sounds. Marathi has 12 vowels total.</p>
+
+  <div class="vowel-grid">
+    <div class="vowel-card">
+      <div class="letter">अ</div>
+      <div class="roman">a</div>
+      <div class="description">"ah" sound<br>→ अन (An) = Grain</div>
+    </div>
+    <div class="vowel-card">
+      <div class="letter">आ</div>
+      <div class="roman">ā</div>
+      <div class="description">"aah" sound<br>→ आई (Āī) = Mother</div>
+    </div>
+    <div class="vowel-card">
+      <div class="letter">इ</div>
+      <div class="roman">i</div>
+      <div class="description">"ih" sound<br>→ इष्ट (Iṣt) = Favourite</div>
+    </div>
+    <div class="vowel-card">
+      <div class="letter">ई</div>
+      <div class="roman">ī</div>
+      <div class="description">"ee" sound<br>→ ईश (Īś) = God</div>
+    </div>
+    <div class="vowel-card">
+      <div class="letter">उ</div>
+      <div class="roman">u</div>
+      <div class="description">"oo" (short)<br>→ उष्ट (Uṣt) = Camel</div>
+    </div>
+    <div class="vowel-card">
+      <div class="letter">ऊ</div>
+      <div class="roman">ū</div>
+      <div class="description">"oo" (long)<br>→ ऊर्ध्व (Ūrdhv) = Upward</div>
+    </div>
+    <div class="vowel-card">
+      <div class="letter">ऋ</div>
+      <div class="roman">ṛ</div>
+      <div class="description">"ri" sound<br>→ ऋतु (Ṛtu) = Season</div>
+    </div>
+    <div class="vowel-card">
+      <div class="letter">ए</div>
+      <div class="roman">e</div>
+      <div class="description">"ay" sound<br>→ एक (Ek) = One</div>
+    </div>
+    <div class="vowel-card">
+      <div class="letter">ऐ</div>
+      <div class="roman">ai</div>
+      <div class="description">"eye" sound<br>→ ऐश्वर्य (Aiśvary) = Wealth</div>
+    </div>
+    <div class="vowel-card">
+      <div class="letter">ओ</div>
+      <div class="roman">o</div>
+      <div class="description">"oh" sound<br>→ ओम् (Om) = Sacred syllable</div>
+    </div>
+    <div class="vowel-card">
+      <div class="letter">औ</div>
+      <div class="roman">au</div>
+      <div class="description">"ow" sound<br>→ औषध (Auṣadh) = Medicine</div>
+    </div>
+  </div>
+
+  <!-- CONSONANTS -->
+  <h2>🗣️ Consonants (व्यंजने — Vyanjne)</h2>
+  <p>Consonants require a vowel to be pronounced. The consonants below are shown with the inherent "a" vowel.</p>
+
+  <h3>क-वर्ग (Ka-Varg) — Velar Sounds</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Letter</th>
+        <th>Romanized</th>
+        <th>Example (Marathi)</th>
+        <th>Meaning</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="marathi">क</td>
+        <td>ka</td>
+        <td class="example">कमल</td>
+        <td class="meaning">Lotus</td>
+      </tr>
+      <tr>
+        <td class="marathi">ख</td>
+        <td>kha</td>
+        <td class="example">खेत</td>
+        <td class="meaning">Field</td>
+      </tr>
+      <tr>
+        <td class="marathi">ग</td>
+        <td>ga</td>
+        <td class="example">गज</td>
+        <td class="meaning">Elephant</td>
+      </tr>
+      <tr>
+        <td class="marathi">घ</td>
+        <td>gha</td>
+        <td class="example">घर</td>
+        <td class="meaning">House</td>
+      </tr>
+      <tr>
+        <td class="marathi">ङ</td>
+        <td>ṅa</td>
+        <td class="example">अंग</td>
+        <td class="meaning">Body</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>च-वर्ग (Cha-Varg) — Palatal Sounds</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Letter</th>
+        <th>Romanized</th>
+        <th>Example (Marathi)</th>
+        <th>Meaning</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="marathi">च</td>
+        <td>cha</td>
+        <td class="example">चक्र</td>
+        <td class="meaning">Wheel</td>
+      </tr>
+      <tr>
+        <td class="marathi">छ</td>
+        <td>chha</td>
+        <td class="example">छत्र</td>
+        <td class="meaning">Umbrella</td>
+      </tr>
+      <tr>
+        <td class="marathi">ज</td>
+        <td>ja</td>
+        <td class="example">जल</td>
+        <td class="meaning">Water</td>
+      </tr>
+      <tr>
+        <td class="marathi">झ</td>
+        <td>jha</td>
+        <td class="example">झुला</td>
+        <td class="meaning">Swing</td>
+      </tr>
+      <tr>
+        <td class="marathi">ञ</td>
+        <td>ña</td>
+        <td class="example">अंचल</td>
+        <td class="meaning">Corner</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>ट-वर्ग (Ta-Varg) — Retroflex Sounds</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Letter</th>
+        <th>Romanized</th>
+        <th>Example (Marathi)</th>
+        <th>Meaning</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="marathi">ट</td>
+        <td>ṭa</td>
+        <td class="example">टोपी</td>
+        <td class="meaning">Hat</td>
+      </tr>
+      <tr>
+        <td class="marathi">ठ</td>
+        <td>ṭha</td>
+        <td class="example">ठग</td>
+        <td class="meaning">Thief</td>
+      </tr>
+      <tr>
+        <td class="marathi">ड</td>
+        <td>ḍa</td>
+        <td class="example">डाळ</td>
+        <td class="meaning">Lentils</td>
+      </tr>
+      <tr>
+        <td class="marathi">ढ</td>
+        <td>ḍha</td>
+        <td class="example">ढक्क</td>
+        <td class="meaning">Covered</td>
+      </tr>
+      <tr>
+        <td class="marathi">ण</td>
+        <td>ṇa</td>
+        <td class="example">कण</td>
+        <td class="meaning">Particle</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>त-वर्ग (Ta-Varg) — Dental Sounds</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Letter</th>
+        <th>Romanized</th>
+        <th>Example (Marathi)</th>
+        <th>Meaning</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="marathi">त</td>
+        <td>ta</td>
+        <td class="example">तर</td>
+        <td class="meaning">Then</td>
+      </tr>
+      <tr>
+        <td class="marathi">थ</td>
+        <td>tha</td>
+        <td class="example">थाळी</td>
+        <td class="meaning">Plate</td>
+      </tr>
+      <tr>
+        <td class="marathi">द</td>
+        <td>da</td>
+        <td class="example">दही</td>
+        <td class="meaning">Yogurt</td>
+      </tr>
+      <tr>
+        <td class="marathi">ध</td>
+        <td>dha</td>
+        <td class="example">धन</td>
+        <td class="meaning">Wealth</td>
+      </tr>
+      <tr>
+        <td class="marathi">न</td>
+        <td>na</td>
+        <td class="example">नाक</td>
+        <td class="meaning">Nose</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>प-वर्ग (Pa-Varg) — Labial Sounds</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Letter</th>
+        <th>Romanized</th>
+        <th>Example (Marathi)</th>
+        <th>Meaning</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="marathi">प</td>
+        <td>pa</td>
+        <td class="example">पक्षी</td>
+        <td class="meaning">Bird</td>
+      </tr>
+      <tr>
+        <td class="marathi">फ</td>
+        <td>pha</td>
+        <td class="example">फल</td>
+        <td class="meaning">Fruit</td>
+      </tr>
+      <tr>
+        <td class="marathi">ब</td>
+        <td>ba</td>
+        <td class="example">बाप</td>
+        <td class="meaning">Father</td>
+      </tr>
+      <tr>
+        <td class="marathi">भ</td>
+        <td>bha</td>
+        <td class="example">भय</td>
+        <td class="meaning">Fear</td>
+      </tr>
+      <tr>
+        <td class="marathi">म</td>
+        <td>ma</td>
+        <td class="example">माता</td>
+        <td class="meaning">Mother</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>अंतस्थ (Antastha) — Semi-vowels</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Letter</th>
+        <th>Romanized</th>
+        <th>Example (Marathi)</th>
+        <th>Meaning</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="marathi">य</td>
+        <td>ya</td>
+        <td class="example">याता</td>
+        <td class="meaning">Journey</td>
+      </tr>
+      <tr>
+        <td class="marathi">र</td>
+        <td>ra</td>
+        <td class="example">रंग</td>
+        <td class="meaning">Colour</td>
+      </tr>
+      <tr>
+        <td class="marathi">ल</td>
+        <td>la</td>
+        <td class="example">लाल</td>
+        <td class="meaning">Red</td>
+      </tr>
+      <tr>
+        <td class="marathi">व</td>
+        <td>va</td>
+        <td class="example">वन</td>
+        <td class="meaning">Forest</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>ऊष्मा (Ushma) — Sibilants & Aspirate</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Letter</th>
+        <th>Romanized</th>
+        <th>Example (Marathi)</th>
+        <th>Meaning</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="marathi">श</td>
+        <td>śa</td>
+        <td class="example">शान्ति</td>
+        <td class="meaning">Peace</td>
+      </tr>
+      <tr>
+        <td class="marathi">ष</td>
+        <td>ṣa</td>
+        <td class="example">षड्</td>
+        <td class="meaning">Six</td>
+      </tr>
+      <tr>
+        <td class="marathi">स</td>
+        <td>sa</td>
+        <td class="example">सर्प</td>
+        <td class="meaning">Snake</td>
+      </tr>
+      <tr>
+        <td class="marathi">ह</td>
+        <td>ha</td>
+        <td class="example">हरा</td>
+        <td class="meaning">Green</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- SPECIAL MARATHI LETTER -->
+  <h2>⭐ The Special Marathi Letter: ळ</h2>
+  <div class="special-box">
+    <div style="font-family: 'Baloo 2', cursive; font-weight: 700; color: var(--teal); margin-bottom: 8px;">
+      What is ळ?
+    </div>
+    <div class="letter">ळ</div>
+    <p style="margin-bottom: 10px;">
+      <strong>Romanized as: ḷa</strong>
+    </p>
+    <p>
+      The letter <strong>ळ (ḷa)</strong> is unique to Marathi! It doesn't exist in Sanskrit or Hindi. 
+      It's pronounced as a retroflex lateral sound, similar to "la" but with the tongue more curled back.
+    </p>
+    <p style="margin-top: 10px;">
+      <strong>Examples:</strong><br>
+      • गुळ (Guḷ) = Jaggery<br>
+      • फुळ (Phuḷ) = Flower<br>
+      • मिळ (Miḷ) = Get/Obtain
+    </p>
+  </div>
+
+  <!-- MATRAS (VOWEL MARKS) -->
+  <h2>📝 Matras — Vowel Marks</h2>
+  <p>Matras are marks added to consonants to change their vowel sound. The base consonant (with inherent 'a') is shown with each matra.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Matra</th>
+        <th>Vowel</th>
+        <th>Applied to 'क'</th>
+        <th>Sound</th>
+        <th>Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="marathi">-</td>
+        <td>a (inherent)</td>
+        <td class="example">क</td>
+        <td>"ka"</td>
+        <td class="meaning">कर (kar) - do</td>
+      </tr>
+      <tr>
+        <td class="marathi">ा</td>
+        <td>ā</td>
+        <td class="example">का</td>
+        <td>"kā"</td>
+        <td class="meaning">काय (kāy) - what</td>
+      </tr>
+      <tr>
+        <td class="marathi">ि</td>
+        <td>i</td>
+        <td class="example">कि</td>
+        <td>"ki"</td>
+        <td class="meaning">किंवा (kin̄vā) - or</td>
+      </tr>
+      <tr>
+        <td class="marathi">ी</td>
+        <td>ī</td>
+        <td class="example">की</td>
+        <td>"kī"</td>
+        <td class="meaning">की (kī) - that</td>
+      </tr>
+      <tr>
+        <td class="marathi">ु</td>
+        <td>u</td>
+        <td class="example">कु</td>
+        <td>"ku"</td>
+        <td class="meaning">कुत्र (kutr) - where</td>
+      </tr>
+      <tr>
+        <td class="marathi">ू</td>
+        <td>ū</td>
+        <td class="example">कू</td>
+        <td>"kū"</td>
+        <td class="meaning">कूप (kūp) - tank</td>
+      </tr>
+      <tr>
+        <td class="marathi">ृ</td>
+        <td>ṛ</td>
+        <td class="example">कृ</td>
+        <td>"kṛ"</td>
+        <td class="meaning">कृषि (kṛṣi) - farming</td>
+      </tr>
+      <tr>
+        <td class="marathi">े</td>
+        <td>e</td>
+        <td class="example">के</td>
+        <td>"ke"</td>
+        <td class="meaning">केव्हा (kevhā) - when</td>
+      </tr>
+      <tr>
+        <td class="marathi">ै</td>
+        <td>ai</td>
+        <td class="example">कै</td>
+        <td>"kai"</td>
+        <td class="meaning">कैद (kaid) - prison</td>
+      </tr>
+      <tr>
+        <td class="marathi">ो</td>
+        <td>o</td>
+        <td class="example">को</td>
+        <td>"ko"</td>
+        <td class="meaning">को (ko) - who</td>
+      </tr>
+      <tr>
+        <td class="marathi">ौ</td>
+        <td>au</td>
+        <td class="example">कौ</td>
+        <td>"kau"</td>
+        <td class="meaning">कौन (kaun) - which</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- COMBINED LETTERS -->
+  <h2>🔗 Combined Letters & Tricks</h2>
+  <p>Consonants can combine to form clusters. Here are useful patterns and tricks for Marathi.</p>
+
+  <h3>Halant (्) — The Virama</h3>
+  <div class="info-box">
+    <strong>What is Halant?</strong> The halant (also called virama) is a symbol (्) that removes the inherent vowel from a consonant, making it a pure consonant sound.
+    <br><br>
+    <strong>Example:</strong> क् (k without 'a') + त = क्त (kta)
+  </div>
+
+  <h3>Common Marathi Consonant Clusters</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Cluster</th>
+        <th>Words with Cluster</th>
+        <th>Pronunciation</th>
+        <th>Meaning</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="marathi">क्त</td>
+        <td class="example">युक्त</td>
+        <td>"kta"</td>
+        <td class="meaning">joined</td>
+      </tr>
+      <tr>
+        <td class="marathi">ष्ट</td>
+        <td class="example">राष्ट्र</td>
+        <td>"ṣṭa"</td>
+        <td class="meaning">nation</td>
+      </tr>
+      <tr>
+        <td class="marathi">न्द</td>
+        <td class="example">चांद</td>
+        <td>"nda"</td>
+        <td class="meaning">moon</td>
+      </tr>
+      <tr>
+        <td class="marathi">न्त</td>
+        <td class="example">शांत</td>
+        <td>"nta"</td>
+        <td class="meaning">peaceful</td>
+      </tr>
+      <tr>
+        <td class="marathi">ड्य</td>
+        <td class="example">अड्यापत</td>
+        <td>"ḍya"</td>
+        <td class="meaning">adamant</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tips">
+    <h4>💡 Marathi-Specific Tips</h4>
+    <ul>
+      <li><strong>Watch for ळ:</strong> This unique Marathi letter appears in many everyday words</li>
+      <li><strong>Nasal Sounds:</strong> Marathi uses anusvara (ं) and visarga (ः) frequently</li>
+      <li><strong>Chandrabindu (ँ):</strong> Used for nasal vowels in some words</li>
+      <li><strong>Marathi Pronunciation:</strong> Can differ from Sanskrit, especially in consonant clusters</li>
+      <li><strong>Practice Distinction:</strong> Pay attention to single vs. double consonants (त vs. त्त)</li>
+    </ul>
+  </div>
+
+  <!-- QUICK REFERENCE -->
+  <h2>⭐ Quick Reference Tips</h2>
+  <div class="tips">
+    <h4>🎯 Learning Order for Marathi</h4>
+    <ul>
+      <li>Start with vowels (अ से औ)</li>
+      <li>Learn consonants group by group (वर्ग)</li>
+      <li>Master the special letter ळ early</li>
+      <li>Practice matras with each consonant</li>
+      <li>Explore combined letters and clusters</li>
+    </ul>
+  </div>
+
+  <div class="tips">
+    <h4>🏆 Practice Tips</h4>
+    <ul>
+      <li>Write each letter multiple times</li>
+      <li>Say it aloud to practice pronunciation</li>
+      <li>Focus on ळ to distinguish Marathi from Sanskrit/Hindi</li>
+      <li>Look for the letters in simple everyday market words</li>
+      <li>Compare Marathi words with Sanskrit words to see differences</li>
+    </ul>
+  </div>
+
+  <a href="nia-language-adventure-index.html" class="back-button" style="margin-top: 30px;">← Back to App</a>
+</div>
+
+<footer>
+  <p>📚 Nia's Language Adventure — Marathi Letters Complete Reference Guide</p>
+  <p style="margin-top: 10px; opacity: 0.7;">Last updated: March 2026</p>
+</footer>
+
+</body>
+</html>

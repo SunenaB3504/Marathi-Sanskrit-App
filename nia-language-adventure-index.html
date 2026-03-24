@@ -1062,6 +1062,7 @@ const VIDEOS = [
   {id:"M1-03",phase:1,track:"M",title:"Marathi Consonants & The Special Letter ळ",yt:"jy_HkE_udw8",dev:"ळ"},
   {id:"M1-04",phase:1,track:"M",title:"Marathi Reading Practice — Words & First Sentences",yt:"P7dfcyhsppE",dev:"वाचन"},
   {id:"M1-05",phase:1,track:"M",title:"Marathi Script Nuances — How It Differs",yt:"_s7llDUNCWE",dev:"लिपी"},
+  {id:"M1-GUIDE",phase:1,track:"M",title:"Marathi Letters Guide — All Letters, Matras & ळ",yt:"",dev:"संदर्श"},
   // PHASE 1 — BRIDGE
   {id:"B1-01",phase:1,track:"B",title:"One Script, Two Languages — Devanagari Connects",yt:"y98bDJ__p3g",dev:"सेतु"},
   {id:"B1-02",phase:1,track:"B",title:"Quiz & Celebration — I Know the Alphabet!",yt:"oDp07V1lkFE",dev:"उत्सव"},
@@ -1152,7 +1153,8 @@ function makeCard(v, compact=false) {
   const done = completed.includes(v.id);
   const tc = trackClass(v.track);
   const isPlaying = currentVideo && currentVideo.id === v.id;
-  const isGuide = v.id === 'S1-GUIDE';
+  const isGuide = v.id.includes('GUIDE');
+  const guideFile = v.id === 'S1-GUIDE' ? 's1-guide.html' : v.id === 'M1-GUIDE' ? 'm1-guide.html' : '';
 
   return `
   <div class="video-card ${done?'completed':''} ${isPlaying?'playing':''}" id="card-${v.id}">
@@ -1187,7 +1189,7 @@ function makeCard(v, compact=false) {
             title="${done?'Mark undone':'Mark as done'}">
             ${done?'✓':'○'}
           </button>
-          <button class="btn-watch ${tc}" onclick="event.stopPropagation();${isGuide?`window.open('s1-guide.html','_blank')`:
+          <button class="btn-watch ${tc}" onclick="event.stopPropagation();${isGuide?`window.open('${guideFile}','_blank')`:
             `openModal('${v.id}')`}">
             ${isGuide?'📖 View':'▶ Watch'}
           </button>

@@ -31,6 +31,7 @@ VIDEO_CODE : https://youtu.be/VIDEO_ID
 - M1-03 : https://youtu.be/jy_HkE_udw8
 - M1-04 : https://youtu.be/P7dfcyhsppE
 - M1-05 : https://youtu.be/_s7llDUNCWE
+- M1 GUIDE : 📖 Reference Guide (Not a video - Opens interactive reference guide with tables, ळ letter, & examples)
 
 ### Bridge
 - B1-01 : https://youtu.be/y98bDJ__p3g
