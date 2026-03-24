@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanskrit Letters Guide | Nia's Language Adventure</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --saffron: #FF6B1A;
+  --gold: #FFB830;
+  --purple: #7C3AED;
+  --dark: #1E1040;
+  --cream: #FFF8F0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--cream);
+  color: var(--dark);
+  line-height: 1.6;
+}
+
+/* Header */
+header {
+  background: linear-gradient(135deg, var(--purple) 0%, #4F1DA3 100%);
+  color: white;
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+header h1 {
+  font-family: 'Baloo 2', cursive;
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+header p {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+/* Main Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* Section Titles */
+h2 {
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.6rem;
+  color: var(--purple);
+  margin-top: 40px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid var(--gold);
+}
+
+h3 {
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.2rem;
+  color: var(--saffron);
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(124,58,237,0.1);
+}
+
+thead {
+  background: linear-gradient(135deg, var(--purple), var(--saffron));
+  color: white;
+}
+
+th {
+  padding: 16px;
+  text-align: left;
+  font-weight: 700;
+  font-family: 'Baloo 2', cursive;
+}
+
+td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+tbody tr:hover {
+  background: #f9f5ff;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Sanskrit Text */
+.sanskrit {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--saffron);
+  font-family: serif;
+}
+
+.example {
+  font-size: 1.1rem;
+  color: var(--dark);
+}
+
+.meaning {
+  color: #666;
+  font-style: italic;
+}
+
+/* Grid for Vowels */
+.vowel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.vowel-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(124,58,237,0.1);
+  border-top: 4px solid var(--gold);
+  transition: transform 0.2s;
+}
+
+.vowel-card:hover {
+  transform: translateY(-4px);
+}
+
+.vowel-card .letter {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--saffron);
+  margin-bottom: 10px;
+  font-family: serif;
+}
+
+.vowel-card .roman {
+  font-weight: 600;
+  color: var(--purple);
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  font-family: 'Baloo 2', cursive;
+}
+
+.vowel-card .description {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Info Box */
+.info-box {
+  background: linear-gradient(135deg, rgba(255,107,26,0.1), rgba(124,58,237,0.1));
+  border-left: 4px solid var(--saffron);
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+  font-size: 0.95rem;
+}
+
+.info-box strong {
+  color: var(--dark);
+}
+
+/* Tips Section */
+.tips {
+  background: #fff9e6;
+  border-left: 4px solid var(--gold);
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.tips h4 {
+  color: var(--saffron);
+  margin-bottom: 10px;
+  font-family: 'Baloo 2', cursive;
+}
+
+.tips ul {
+  margin-left: 20px;
+}
+
+.tips li {
+  margin-bottom: 8px;
+  color: #555;
+}
+
+/* Back Button */
+.back-button {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  background: var(--purple);
+  color: white;
+  text-decoration: none;
+  border-radius: 24px;
+  font-family: 'Baloo 2', cursive;
+  font-weight: 700;
+  transition: all 0.2s;
+}
+
+.back-button:hover {
+  background: var(--saffron);
+  transform: translateX(-4px);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 30px 20px;
+  background: var(--dark);
+  color: white;
+  margin-top: 60px;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  header h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.3rem; }
+  .vowel-grid { grid-template-columns: 1fr 1fr; }
+  table { font-size: 0.9rem; }
+  th, td { padding: 10px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📖 Sanskrit Letters Guide</h1>
+  <p>Complete reference for letters, matras, and combined letters</p>
+</header>
+
+<div class="container">
+  <a href="nia-language-adventure-index.html" class="back-button">← Back to App</a>
+
+  <!-- INTRODUCTION -->
+  <div class="info-box">
+    <strong>Welcome to the Sanskrit Letters Reference Guide!</strong>
+    <br><br>
+    This guide provides a complete overview of all Sanskrit letters, vowel marks (matras), and combined letters with examples. Use this as a quick reference while learning!
+  </div>
+
+  <!-- VOWELS (SWARA) -->
+  <h2>🔤 Vowels (स्वराः — Swarah)</h2>
+  <p>Vowels are the foundation of Sanskrit. They can stand alone and make complete sounds.</p>
+
+  <div class="vowel-grid">
+    <div class="vowel-card">
+      <div class="letter">अ</div>
+      <div class="roman">a</div>
+      <div class="description">"ah" sound<br>→ अनल (Anal) = Fire</div>
+    </div>
+    <div class="vowel-card">
+      <div class="letter">आ</div>
+      <div class="roman">ā</div>
+      <div class="description">"aah" sound<br>→ आत्मा (Ātmā) = Soul</div>
+    </div>
+    <div class="vowel-card">
+      <div class="letter">इ</div>
+      <div class="roman">i</div>
+      <div class="description">"ih" sound<br>→ इक्षु (Ikṣu) = Sugarcane</div>
+    </div>
+    <div class="vowel-card">
+      <div class="letter">ई</div>
+      <div class="roman">ī</div>
+      <div class="description">"ee" sound<br>→ ईश्वर (Īśvar) = God</div>
+    </div>
+    <div class="vowel-card">
+      <div class="letter">उ</div>
+      <div class="roman">u</div>
+      <div class="description">"oo" (short)<br>→ उष्ट्र (Uṣṭr) = Camel</div>
+    </div>
+    <div class="vowel-card">
+      <div class="letter">ऊ</div>
+      <div class="roman">ū</div>
+      <div class="description">"oo" (long)<br>→ ऊर्ध्व (Ūrdhv) = Upward</div>
+    </div>
+    <div class="vowel-card">
+      <div class="letter">ऋ</div>
+      <div class="roman">ṛ</div>
+      <div class="description">"ri" sound<br>→ ऋषि (Ṛṣi) = Sage</div>
+    </div>
+    <div class="vowel-card">
+      <div class="letter">ए</div>
+      <div class="roman">e</div>
+      <div class="description">"ay" sound<br>→ एकः (Ekah) = One</div>
+    </div>
+    <div class="vowel-card">
+      <div class="letter">ऐ</div>
+      <div class="roman">ai</div>
+      <div class="description">"eye" sound<br>→ ऐश्वर्य (Aiśvary) = Wealth</div>
+    </div>
+    <div class="vowel-card">
+      <div class="letter">ओ</div>
+      <div class="roman">o</div>
+      <div class="description">"oh" sound<br>→ ओम् (Om) = Sacred syllable</div>
+    </div>
+    <div class="vowel-card">
+      <div class="letter">औ</div>
+      <div class="roman">au</div>
+      <div class="description">"ow" sound<br>→ औषध (Auṣadh) = Medicine</div>
+    </div>
+  </div>
+
+  <!-- CONSONANTS -->
+  <h2>🗣️ Consonants (व्यञ्जनाः — Vyanjana)</h2>
+  <p>Consonants require a vowel to be pronounced. The consonants below are shown with the inherent "a" vowel.</p>
+
+  <h3>क-वर्ग (Ka-Varga) — Velar Sounds</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Letter</th>
+        <th>Romanized</th>
+        <th>Example (Sanskrit)</th>
+        <th>Meaning</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="sanskrit">क</td>
+        <td>ka</td>
+        <td class="example">कमल</td>
+        <td class="meaning">Lotus</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">ख</td>
+        <td>kha</td>
+        <td class="example">खग</td>
+        <td class="meaning">Bird</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">ग</td>
+        <td>ga</td>
+        <td class="example">गज</td>
+        <td class="meaning">Elephant</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">घ</td>
+        <td>gha</td>
+        <td class="example">घट</td>
+        <td class="meaning">Pot</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">ङ</td>
+        <td>ṅa</td>
+        <td class="example">अङ्ग</td>
+        <td class="meaning">Body</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>च-वर्ग (Cha-Varga) — Palatal Sounds</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Letter</th>
+        <th>Romanized</th>
+        <th>Example (Sanskrit)</th>
+        <th>Meaning</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="sanskrit">च</td>
+        <td>cha</td>
+        <td class="example">चक्र</td>
+        <td class="meaning">Wheel</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">छ</td>
+        <td>chha</td>
+        <td class="example">छत्र</td>
+        <td class="meaning">Umbrella</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">ज</td>
+        <td>ja</td>
+        <td class="example">जल</td>
+        <td class="meaning">Water</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">झ</td>
+        <td>jha</td>
+        <td class="example">झटा</td>
+        <td class="meaning">Mane</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">ञ</td>
+        <td>ña</td>
+        <td class="example">अञ्चल</td>
+        <td class="meaning">Corner</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>ट-वर्ग (Ta-Varga) — Retroflex Sounds</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Letter</th>
+        <th>Romanized</th>
+        <th>Example (Sanskrit)</th>
+        <th>Meaning</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="sanskrit">ट</td>
+        <td>ṭa</td>
+        <td class="example">टङ्क</td>
+        <td class="meaning">Stamp</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">ठ</td>
+        <td>ṭha</td>
+        <td class="example">ठग</td>
+        <td class="meaning">Thief</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">ड</td>
+        <td>ḍa</td>
+        <td class="example">डङ्क</td>
+        <td class="meaning">Sting</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">ढ</td>
+        <td>ḍha</td>
+        <td class="example">ढक्क</td>
+        <td class="meaning">Covered</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">ण</td>
+        <td>ṇa</td>
+        <td class="example">कण</td>
+        <td class="meaning">Particle</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>त-वर्ग (Ta-Varga) — Dental Sounds</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Letter</th>
+        <th>Romanized</th>
+        <th>Example (Sanskrit)</th>
+        <th>Meaning</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="sanskrit">त</td>
+        <td>ta</td>
+        <td class="example">तरु</td>
+        <td class="meaning">Tree</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">थ</td>
+        <td>tha</td>
+        <td class="example">थल</td>
+        <td class="meaning">Ground</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">द</td>
+        <td>da</td>
+        <td class="example">दग्ध</td>
+        <td class="meaning">Burnt</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">ध</td>
+        <td>dha</td>
+        <td class="example">धन</td>
+        <td class="meaning">Wealth</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">न</td>
+        <td>na</td>
+        <td class="example">नक्षत्र</td>
+        <td class="meaning">Star</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>प-वर्ग (Pa-Varga) — Labial Sounds</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Letter</th>
+        <th>Romanized</th>
+        <th>Example (Sanskrit)</th>
+        <th>Meaning</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="sanskrit">प</td>
+        <td>pa</td>
+        <td class="example">पक्षी</td>
+        <td class="meaning">Bird</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">फ</td>
+        <td>pha</td>
+        <td class="example">फल</td>
+        <td class="meaning">Fruit</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">ब</td>
+        <td>ba</td>
+        <td class="example">बीज</td>
+        <td class="meaning">Seed</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">भ</td>
+        <td>bha</td>
+        <td class="example">भय</td>
+        <td class="meaning">Fear</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">म</td>
+        <td>ma</td>
+        <td class="example">मातृ</td>
+        <td class="meaning">Mother</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>अन्तस्थ (Antastha) — Semi-vowels</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Letter</th>
+        <th>Romanized</th>
+        <th>Example (Sanskrit)</th>
+        <th>Meaning</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="sanskrit">य</td>
+        <td>ya</td>
+        <td class="example">यम</td>
+        <td class="meaning">Restraint</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">र</td>
+        <td>ra</td>
+        <td class="example">रस</td>
+        <td class="meaning">Taste</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">ल</td>
+        <td>la</td>
+        <td class="example">लक्ष्य</td>
+        <td class="meaning">Target</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">व</td>
+        <td>va</td>
+        <td class="example">वन</td>
+        <td class="meaning">Forest</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>ऊष्मा (Ushma) — Sibilants & Aspirate</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Letter</th>
+        <th>Romanized</th>
+        <th>Example (Sanskrit)</th>
+        <th>Meaning</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="sanskrit">श</td>
+        <td>śa</td>
+        <td class="example">शान्ति</td>
+        <td class="meaning">Peace</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">ष</td>
+        <td>ṣa</td>
+        <td class="example">षड्</td>
+        <td class="meaning">Six</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">स</td>
+        <td>sa</td>
+        <td class="example">सर्प</td>
+        <td class="meaning">Snake</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">ह</td>
+        <td>ha</td>
+        <td class="example">हर्ष</td>
+        <td class="meaning">Joy</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- MATRAS (VOWEL MARKS) -->
+  <h2>📝 Matras — Vowel Marks</h2>
+  <p>Matras are marks added to consonants to change their vowel sound. The base consonant (with inherent 'a') is shown with each matra.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Matra</th>
+        <th>Vowel</th>
+        <th>Applied to 'क'</th>
+        <th>Sound</th>
+        <th>Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="sanskrit">-</td>
+        <td>a (inherent)</td>
+        <td class="example">क</td>
+        <td>"ka"</td>
+        <td class="meaning">अक (ak) - eye</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">ा</td>
+        <td>ā</td>
+        <td class="example">का</td>
+        <td>"kā"</td>
+        <td class="meaning">काय (kāy) - body</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">ि</td>
+        <td>i</td>
+        <td class="example">कि</td>
+        <td>"ki"</td>
+        <td class="meaning">किम् (kim) - what</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">ी</td>
+        <td>ī</td>
+        <td class="example">की</td>
+        <td>"kī"</td>
+        <td class="meaning">कीर्ति (kīrti) - fame</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">ु</td>
+        <td>u</td>
+        <td class="example">कु</td>
+        <td>"ku"</td>
+        <td class="meaning">कुआर (kuār) - well</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">ू</td>
+        <td>ū</td>
+        <td class="example">कू</td>
+        <td>"kū"</td>
+        <td class="meaning">कूप (kūp) - tank</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">ृ</td>
+        <td>ṛ</td>
+        <td class="example">कृ</td>
+        <td>"kṛ"</td>
+        <td class="meaning">कृषि (kṛṣi) - farming</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">े</td>
+        <td>e</td>
+        <td class="example">के</td>
+        <td>"ke"</td>
+        <td class="meaning">केन (ken) - by whom</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">ै</td>
+        <td>ai</td>
+        <td class="example">कै</td>
+        <td>"kai"</td>
+        <td class="meaning">कैतव (kaitav) - deceit</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">ो</td>
+        <td>o</td>
+        <td class="example">को</td>
+        <td>"ko"</td>
+        <td class="meaning">कोश (kosh) - treasury</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">ौ</td>
+        <td>au</td>
+        <td class="example">कौ</td>
+        <td>"kau"</td>
+        <td class="meaning">कौस्तुभ (kaustubh) - jewel</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- COMBINED LETTERS -->
+  <h2>🔗 Combined Letters & Tricks</h2>
+  <p>Consonants can combine to form clusters. Here are useful patterns and tricks:</p>
+
+  <h3>Halant (्) — The Virama</h3>
+  <div class="info-box">
+    <strong>What is Halant?</strong> The halant (also called virama) is a symbol (्) that removes the inherent vowel from a consonant, making it a pure consonant sound.
+    <br><br>
+    <strong>Example:</strong> क् (k without 'a') + त = क्त (kta)
+  </div>
+
+  <h3>Common Consonant Clusters</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Cluster</th>
+        <th>Words with Cluster</th>
+        <th>Pronunciation</th>
+        <th>Meaning</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="sanskrit">क्त</td>
+        <td class="example">युक्त, शक्ति</td>
+        <td>"kta"</td>
+        <td class="meaning">joined, power</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">ष्ट</td>
+        <td class="example">राष्ट्र, पष्ट</td>
+        <td>"ṣṭa"</td>
+        <td class="meaning">nation, clear</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">न्द</td>
+        <td class="example">चन्द्र, बन्द</td>
+        <td>"nda"</td>
+        <td class="meaning">moon, closed</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">म्य</td>
+        <td class="example">स्मय, आत्मा</td>
+        <td>"mya"</td>
+        <td class="meaning">marvel, soul</td>
+      </tr>
+      <tr>
+        <td class="sanskrit">न्त</td>
+        <td class="example">शान्त, अन्त</td>
+        <td>"nta"</td>
+        <td class="meaning">peaceful, end</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tips">
+    <h4>💡 Tips for Reading Combined Letters</h4>
+    <ul>
+      <li><strong>Left to Right:</strong> Read consonant clusters from left to right</li>
+      <li><strong>Identify the Halant:</strong> Look for the halant (्) symbol to find where the cluster begins</li>
+      <li><strong>Practice Slowly:</strong> Break down clusters into individual sounds first</li>
+      <li><strong>Repeat:</strong> Say each cluster multiple times to build muscle memory</li>
+      <li><strong>Common Patterns:</strong> क्त, ष्ट, न्द, म्य appear frequently in Sanskrit</li>
+    </ul>
+  </div>
+
+  <!-- QUICK REFERENCE -->
+  <h2>⭐ Quick Reference Tips</h2>
+  <div class="tips">
+    <h4>🎯 Learning Order</h4>
+    <ul>
+      <li>Start with vowels (अ से औ)</li>
+      <li>Learn consonants group by group (वर्ग)</li>
+      <li>Practice matras with each consonant</li>
+      <li>Then explore combined letters</li>
+    </ul>
+  </div>
+
+  <div class="tips">
+    <h4>🏆 Practice Tips</h4>
+    <ul>
+      <li>Write each letter multiple times</li>
+      <li>Say it aloud to practice pronunciation</li>
+      <li>Look for the letters in simple words</li>
+      <li>Use the examples provided to understand context</li>
+    </ul>
+  </div>
+
+  <a href="nia-language-adventure-index.html" class="back-button" style="margin-top: 30px;">← Back to App</a>
+</div>
+
+<footer>
+  <p>📚 Nia's Language Adventure — Sanskrit Letters Complete Reference Guide</p>
+  <p style="margin-top: 10px; opacity: 0.7;">Last updated: March 2026</p>
+</footer>
+
+</body>
+</html>

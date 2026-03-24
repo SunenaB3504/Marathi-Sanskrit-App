@@ -1152,6 +1152,7 @@ function makeCard(v, compact=false) {
   const done = completed.includes(v.id);
   const tc = trackClass(v.track);
   const isPlaying = currentVideo && currentVideo.id === v.id;
+  const isGuide = v.id === 'S1-GUIDE';
 
   return `
   <div class="video-card ${done?'completed':''} ${isPlaying?'playing':''}" id="card-${v.id}">
@@ -1161,7 +1162,7 @@ function makeCard(v, compact=false) {
                style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"
                onerror="this.style.display='none'">`
         : `<div class="thumb-placeholder">
-             <div class="play-icon">▶</div>
+             <div class="play-icon">${isGuide?'📖':'▶'}</div>
              <div class="vid-code">${v.id}</div>
            </div>`
       }
@@ -1169,6 +1170,7 @@ function makeCard(v, compact=false) {
       ${done?`<div class="completed-ribbon">✓ Done</div>`:''}
       ${isPlaying?`<div class="playing-ribbon">▶ Playing</div>`:''}
       ${v.yt?`<div class="yt-saved-badge">▶ YouTube</div>`:''}
+      ${isGuide?`<div class="yt-saved-badge" style="background:rgba(0,0,0,0.8)">📖 Guide</div>`:''}
     </div>
     <div class="card-body">
       <div class="card-meta">
@@ -1185,13 +1187,14 @@ function makeCard(v, compact=false) {
             title="${done?'Mark undone':'Mark as done'}">
             ${done?'✓':'○'}
           </button>
-          <button class="btn-watch ${tc}" onclick="openModal('${v.id}')">
-            ${v.yt?'▶ Watch':'▶ Open'}
+          <button class="btn-watch ${tc}" onclick="event.stopPropagation();${isGuide?`window.open('s1-guide.html','_blank')`:
+            `openModal('${v.id}')`}">
+            ${isGuide?'📖 View':'▶ Watch'}
           </button>
         </div>
       </div>
     </div>
-    <div class="youtube-input-row">
+    <div class="youtube-input-row" ${isGuide?'style="display:none;"':''}>
       <input class="yt-input" type="text" placeholder="Paste YouTube link or ID…"
         id="yt-${v.id}" value="${v.yt||''}"
         onclick="event.stopPropagation()"
