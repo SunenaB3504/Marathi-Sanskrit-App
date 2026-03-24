@@ -1,0 +1,21 @@
+# PDF and image files
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.gif
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Node modules
+node_modules/
+
+# Temporary files
+*.tmp
+*.temp
