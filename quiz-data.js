@@ -122,10 +122,11 @@ const S1_QUIZ = {
     // Short Answer (3 questions)
     {
       id: 's1-q14',
-      type: 'short-answer',
-      question: 'What is the difference between क (ka) and ख (kha)?',
-      correctAnswer: ['kha is aspirated', 'kha has aspiration', 'ka is unaspirated kha is aspirated', 'kha has an h sound'],
-      explanation: 'ख (kha) includes aspiration (an extra breath), making it sound like "kh" in "khan", while क (ka) is unaspirated.'
+      type: 'mcq',
+      question: 'In Devanagari, what is the main difference in sound between "क" (ka) and "ख" (kha)?',
+      options: ['"ख" has an extra "h" sound (aspiration)', '"क" is a vowel', '"ख" is only used at the end of words', 'There is no difference'],
+      correctAnswer: 0,
+      explanation: 'ख (kha) is aspirated, meaning it is pronounced with an extra breath (like "kh" in "khan").'
     },
     {
       id: 's1-q15',
@@ -395,17 +396,19 @@ const S2_QUIZ = {
     // Short Answer (3)
     {
       id: 's2-q14',
-      type: 'short-answer',
-      question: 'Name two colors you learned in the S2 lessons.',
-      correctAnswer: ['red blue', 'नीला लाल', 'blue and red', 'red and green', 'white and black'],
-      explanation: 'S2 taught colors like: लाल (lal - red), नीला (neela - blue), श्वेत (shwet - white), आदि।'
+      type: 'mcq',
+      question: 'Which of these pairs represents colors in Sanskrit?',
+      options: ['लाल (Red) & नीला (Blue)', 'शेर (Lion) & हाथी (Elephant)', 'वन (Forest) & नदी (River)', 'पिता (Father) & माता (Mother)'],
+      correctAnswer: 0,
+      explanation: 'S2 teaches colors like लाल (red) and नीला (blue).'
     },
     {
       id: 's2-q15',
-      type: 'short-answer',
-      question: 'What are the names of three animals in Sanskrit?',
-      correctAnswer: ['hathi lion tiger', 'elephant lion tiger', 'शेर हाथी बाघ'],
-      explanation: 'Animals: हाथी (hathi - elephant), शेर (sher - lion), बाघ (bagh - tiger), etc.'
+      type: 'mcq',
+      question: 'Which list contains three animals in Sanskrit?',
+      options: ['शेर, हाथी, बाघ', 'लाल, नीला, पीला', 'नेत्र, कान, नाक', 'आम, केला, अनार'],
+      correctAnswer: 0,
+      explanation: 'Animals in S2 include हाथी (elephant), शेर (lion), and बाघ (tiger).'
     },
     {
       id: 's2-q16',
@@ -668,10 +671,11 @@ const M1_QUIZ = {
     // Short Answer (3)
     {
       id: 'm1-q14',
-      type: 'short-answer',
-      question: 'Name the 8 basic vowels in Marathi.',
-      correctAnswer: ['a aa i i u u ai au', 'अ आ इ ई उ ऊ ए ओ'],
-      explanation: 'The 8 vowels: अ, आ, इ, ई, उ, ऊ, ए, ओ (some texts show variations).'
+      type: 'mcq',
+      question: 'Which of these are the basic vowels in Marathi?',
+      options: ['अ आ इ ई उ ऊ ए ओ', 'क ख ग घ ङ', '१ २ ३ ४ ५', 'नमस्ते, धन्यवाद'],
+      correctAnswer: 0,
+      explanation: 'Marathi vowels are: अ, आ, इ, ई, उ, ऊ, ए, ओ.'
     },
     {
       id: 'm1-q15',
@@ -941,17 +945,19 @@ const M2_QUIZ = {
     // Short Answer (3)
     {
       id: 'm2-q14',
-      type: 'short-answer',
-      question: 'Name three colors in Marathi.',
-      correctAnswer: ['red blue green', 'laal neela hara', 'लाल नीला हरा'],
-      explanation: 'Colors in Marathi: लाल (red), नीला (blue), हरा (green), आदि।'
+      type: 'mcq',
+      question: 'Which of these are colors in Marathi?',
+      options: ['लाल, नीला, हरा', 'घर, शाळा, दफ्तर', 'आई, बाबा, भाऊ', 'सफरचंद, केळी, आंबा'],
+      correctAnswer: 0,
+      explanation: 'Colors in Marathi include लाल (red), नीला (blue), and हरा (green).'
     },
     {
       id: 'm2-q15',
-      type: 'short-answer',
-      question: 'What are two family members in Marathi?',
-      correctAnswer: ['mother father', 'aai pita', 'भाई बहिण'],
-      explanation: 'Family members: आई (mother), पिता (father), भाई (brother), बहिण (sister), आदि।'
+      type: 'mcq',
+      question: 'Which of these represents family members in Marathi?',
+      options: ['आई & पिता', 'लाल & निळा', 'घर & शाळा', 'आंबा & केळी'],
+      correctAnswer: 0,
+      explanation: 'आई (mother) and पिता (father) are family members.'
     },
     {
       id: 'm2-q16',
