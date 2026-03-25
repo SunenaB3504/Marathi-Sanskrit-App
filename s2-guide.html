@@ -1354,16 +1354,66 @@ footer {
   document.getElementById('quizStartBtn').addEventListener('click', () => startQuiz(S2_QUIZ));
   document.getElementById('quizCloseBtn').addEventListener('click', closeQuiz);
   document.getElementById('exitBtn').addEventListener('click', closeQuiz);
-  document.getElementById('quizPrevBtn').addEventListener('click', () => { if (currentQuiz) { currentQuiz.prevQuestion(); renderQuestion(); } });
-  document.getElementById('quizNextBtn').addEventListener('click', () => { if (currentQuiz) { currentQuiz.nextQuestion(); renderQuestion(); } });
+  document.getElementById('quizPrevBtn').addEventListener('click', () => { if (currentQuiz && currentQuiz.prevQuestion()) currentQuiz.render('quizQuestionArea'); });
+  document.getElementById('quizNextBtn').addEventListener('click', () => { if (currentQuiz && currentQuiz.nextQuestion()) currentQuiz.render('quizQuestionArea'); });
   document.getElementById('quizSubmitBtn').addEventListener('click', submitAnswer);
   document.getElementById('retakeBtn').addEventListener('click', () => { currentQuiz.resetQuiz(); startQuiz(S2_QUIZ); });
-  function startQuiz(quizData) { currentQuiz = new QuizSystem(quizData.id, quizData.questions); document.getElementById('quizTitle').textContent = quizData.title; document.getElementById('quizSubtitle').textContent = quizData.description; document.getElementById('quizProgressMax').textContent = quizData.totalQuestions; document.getElementById('quizModal').classList.remove('hidden'); document.getElementById('resultsModal').classList.add('hidden'); renderQuestion(); }
-  function renderQuestion() { const question = currentQuiz.getCurrentQuestion(); const questionArea = document.getElementById('quizQuestionArea'); const progress = currentQuiz.getProgress(); document.getElementById('quizProgressFill').style.width = progress + '%'; document.getElementById('quizProgressNum').textContent = currentQuiz.currentQuestionIndex + 1; let html = `<div class="quiz-question"><div class="quiz-question-text">${question.question}</div>`; if (['mcq', 'true-false', 'letter-id', 'pronunciation'].includes(question.type)) { html += '<div class="quiz-options">'; question.options.forEach((option, idx) => { const selected = currentQuiz.userAnswers[currentQuiz.currentQuestionIndex] === idx ? 'selected' : ''; html += `<div class="quiz-option ${selected}" onclick="selectOption(${idx})"><input type="radio" name="ans" value="${idx}" ${selected ? 'checked' : ''}><label>${option}</label></div>`; }); html += '</div>'; } else { const userAnswer = currentQuiz.userAnswers[currentQuiz.currentQuestionIndex] || ''; html += `<input type="text" class="quiz-text-input" id="textAnswer" value="${userAnswer}" placeholder="Type your answer here...">`; } html += '</div>'; questionArea.innerHTML = html; document.getElementById('quizPrevBtn').disabled = currentQuiz.currentQuestionIndex === 0; document.getElementById('quizNextBtn').disabled = currentQuiz.currentQuestionIndex === currentQuiz.questions.length - 1; }
-  function selectOption(idx) { currentQuiz.userAnswers[currentQuiz.currentQuestionIndex] = idx; currentQuiz.saveToStorage(); document.querySelectorAll('.quiz-option').forEach((el, i) => el.classList.toggle('selected', i === idx)); }
-  function submitAnswer() { const question = currentQuiz.getCurrentQuestion(); let userAnswer; if (['mcq', 'true-false', 'letter-id', 'pronunciation'].includes(question.type)) { const selected = document.querySelector('input[name="ans"]:checked'); if (!selected) { alert('Please select an answer'); return; } userAnswer = parseInt(selected.value); } else { const textInput = document.getElementById('textAnswer'); userAnswer = textInput.value; if (!userAnswer.trim()) { alert('Please type an answer'); return; } } const result = currentQuiz.submitAnswer(userAnswer); const feedbackHtml = `<div class="quiz-feedback ${result.correct ? 'correct' : 'incorrect'}">${result.feedback}</div>`; const questionArea = document.getElementById('quizQuestionArea'); questionArea.innerHTML += feedbackHtml; if (currentQuiz.currentQuestionIndex === currentQuiz.questions.length - 1) { document.getElementById('quizSubmitBtn').textContent = 'See Results'; document.getElementById('quizSubmitBtn').onclick = showResults; } }
-  function showResults() { const score = currentQuiz.completeQuiz(); const pct = score.percentage; const message = pct >= 80 ? '🎉 Excellent work!' : pct >= 60 ? '👏 Good job!' : '💪 Keep practicing!'; const passed = pct >= 80 ? '✅ PASSED' : '⚠️ RETAKE RECOMMENDED'; document.getElementById('resultScore').textContent = pct; document.getElementById('resultPoints').textContent = `${score.totalPoints} / ${score.maxPoints}`; document.getElementById('resultMessage').textContent = message; document.getElementById('resultStatus').textContent = passed; document.getElementById('quizModal').classList.add('hidden'); document.getElementById('resultsModal').classList.remove('hidden'); }
-  function closeQuiz() { document.getElementById('quizModal').classList.add('hidden'); document.getElementById('resultsModal').classList.add('hidden'); }
+
+  function startQuiz(quizData) {
+    currentQuiz = new QuizSystem(quizData.id, quizData.questions);
+    document.getElementById('quizTitle').textContent = quizData.title;
+    document.getElementById('quizSubtitle').textContent = quizData.description;
+    document.getElementById('quizProgressMax').textContent = quizData.totalQuestions;
+    document.getElementById('quizModal').classList.remove('hidden');
+    document.getElementById('resultsModal').classList.add('hidden');
+    currentQuiz.render('quizQuestionArea', updateNavButtons);
+  }
+
+  function updateNavButtons() {
+    document.getElementById('quizProgressFill').style.width = currentQuiz.getProgress() + '%';
+    document.getElementById('quizProgressNum').textContent = currentQuiz.currentQuestionIndex + 1;
+    document.getElementById('quizPrevBtn').disabled = currentQuiz.currentQuestionIndex === 0;
+    document.getElementById('quizNextBtn').disabled = currentQuiz.currentQuestionIndex === currentQuiz.questions.length - 1;
+    if (currentQuiz.currentQuestionIndex < currentQuiz.questions.length - 1) {
+      document.getElementById('quizSubmitBtn').textContent = 'Submit Answer';
+      document.getElementById('quizSubmitBtn').onclick = submitAnswer;
+    }
+  }
+
+  function submitAnswer() {
+    const userAnswer = currentQuiz.userAnswers[currentQuiz.currentQuestionIndex];
+    if (userAnswer === undefined || (typeof userAnswer === 'object' && Object.keys(userAnswer).length === 0)) {
+      alert('Please provide an answer first');
+      return;
+    }
+    const existingFeedback = document.querySelector('.quiz-feedback');
+    if (existingFeedback) existingFeedback.remove();
+    const result = currentQuiz.submitAnswer(userAnswer);
+    const feedbackHtml = `<div class="quiz-feedback ${result.correct ? 'correct' : 'incorrect'}">${result.feedback}</div>`;
+    document.getElementById('quizQuestionArea').insertAdjacentHTML('beforeend', feedbackHtml);
+    if (currentQuiz.currentQuestionIndex === currentQuiz.questions.length - 1) {
+      document.getElementById('quizSubmitBtn').textContent = 'See Results';
+      document.getElementById('quizSubmitBtn').onclick = showResults;
+    }
+  }
+
+  function showResults() {
+    const score = currentQuiz.completeQuiz();
+    const pct = score.percentage;
+    const message = pct >= 80 ? '🎉 Excellent work!' : pct >= 60 ? '👏 Good job!' : '💪 Keep practicing!';
+    const passed = pct >= 80 ? '✅ PASSED' : '⚠️ RETAKE RECOMMENDED';
+    document.getElementById('resultScore').textContent = pct;
+    document.getElementById('resultPoints').textContent = `${score.totalPoints} / ${score.maxPoints}`;
+    document.getElementById('resultMessage').textContent = message;
+    document.getElementById('resultStatus').textContent = passed;
+    document.getElementById('quizModal').classList.add('hidden');
+    document.getElementById('resultsModal').classList.remove('hidden');
+  }
+
+  function closeQuiz() {
+    document.getElementById('quizModal').classList.add('hidden');
+    document.getElementById('resultsModal').classList.add('hidden');
+  }
 </script>
 </div>
 

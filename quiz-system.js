@@ -11,7 +11,26 @@ class QuizSystem {
     this.userAnswers = [];
     this.scores = [];
     this.isCompleted = false;
+    this.injectStyles();
     this.loadFromStorage();
+  }
+
+  // Inject necessary styles for advanced question types
+  injectStyles() {
+    if (document.getElementById('quiz-advanced-styles')) return;
+    const style = document.createElement('style');
+    style.id = 'quiz-advanced-styles';
+    style.innerHTML = `
+      .quiz-matching-area, .quiz-arrange-area { margin-top: 20px; }
+      .matching-row, .arrange-row { display: flex; align-items: center; justify-content: space-between; padding: 12px; background: #f8f9fa; border-radius: 8px; margin-bottom: 10px; border: 1px solid #e0e0e0; transition: all 0.2s; }
+      .matching-row:hover, .arrange-row:hover { border-color: #00B4A6; background: #f0fdfc; }
+      .matching-left, .arrange-item { font-weight: 600; color: #1E1040; flex: 1; }
+      .matching-connector { margin: 0 15px; color: #999; }
+      .matching-right select, .arrange-row select { padding: 8px 12px; border: 2px solid #e0e0e0; border-radius: 6px; font-family: 'Nunito', sans-serif; cursor: pointer; background: white; }
+      .matching-right select:focus, .arrange-row select:focus { outline: none; border-color: #00B4A6; }
+      .quiz-text-input { width: 100%; padding: 14px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1rem; }
+    `;
+    document.head.appendChild(style);
   }
 
   // Load quiz progress from localStorage
@@ -47,7 +66,7 @@ class QuizSystem {
   validateAnswer(question, userAnswer) {
     const normalize = (str) => {
       if (typeof str !== 'string') return '';
-      return str.trim().toLowerCase().replace(/[^a-zा-ह0-9]/g, '');
+      return str.trim().toLowerCase().replace(/[^a-z\u0900-\u097F0-9]/g, '');
     };
 
     const calculateSimilarity = (str1, str2) => {
@@ -80,7 +99,7 @@ class QuizSystem {
       case 'matching':
         // Check if all pairs match
         const allCorrect = Object.entries(userAnswer).every(
-          ([key, value]) => question.correctAnswer[key] === value
+          ([key, value]) => question.correctAnswer[key] == value
         );
         return {
           correct: allCorrect,
@@ -230,6 +249,130 @@ class QuizSystem {
   // Get quiz progress percentage
   getProgress() {
     return Math.round(((this.currentQuestionIndex + 1) / this.questions.length) * 100);
+  }
+
+  render(containerId, onStateChange) {
+    const question = this.getCurrentQuestion();
+    const type = (question.type || '').trim().toLowerCase();
+    
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    const userAnswer = this.userAnswers[this.currentQuestionIndex];
+    let html = `<div class="quiz-question"><div class="quiz-question-text">${question.question}</div>`;
+
+    if (['mcq', 'true-false', 'letter-id', 'pronunciation'].includes(type)) {
+      html += '<div class="quiz-options">';
+      question.options.forEach((option, idx) => {
+        const selected = userAnswer === idx ? 'selected' : '';
+        html += `
+          <div class="quiz-option ${selected}" onclick="currentQuiz.handleUpdate('select', ${idx})">
+            <input type="radio" name="ans" value="${idx}" ${selected ? 'checked' : ''}>
+            <label>${option}</label>
+          </div>`;
+      });
+      html += '</div>';
+    } else if (type === 'matching') {
+      html += '<div class="quiz-matching-area">';
+      question.pairs.forEach((pair, idx) => {
+        const currentMatch = (userAnswer && userAnswer[idx] !== undefined) ? userAnswer[idx] : '';
+        html += `
+          <div class="matching-row">
+            <div class="matching-left">${pair.left}</div>
+            <div class="matching-connector">→</div>
+            <div class="matching-right">
+              <select onchange="currentQuiz.handleUpdate('match', {pairIdx: ${idx}, value: this.value})">
+                <option value="" ${currentMatch === '' ? 'selected' : ''}>Select match...</option>
+                ${question.pairs.map((p, pIdx) => `
+                  <option value="${pIdx}" ${currentMatch === pIdx ? 'selected' : ''}>${p.right}</option>
+                `).join('')}
+              </select>
+            </div>
+          </div>`;
+      });
+      html += '</div>';
+    } else if (type === 'arrange') {
+      html += '<div class="quiz-arrange-area">';
+      const items = question.items;
+      const currentOrder = userAnswer || [];
+      html += '<p style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">Select the position (1, 2, 3...) for each item:</p>';
+      items.forEach((item, idx) => {
+        const position = currentOrder.indexOf(item) + 1;
+        html += `
+          <div class="arrange-row">
+            <div class="arrange-item">${item}</div>
+            <select onchange="currentQuiz.handleUpdate('arrange', {item: '${item}', pos: this.value})">
+              <option value="" ${position === 0 ? 'selected' : ''}>Pos...</option>
+              ${items.map((_, i) => `
+                <option value="${i + 1}" ${position === i + 1 ? 'selected' : ''}>${i + 1}</option>
+              `).join('')}
+            </select>
+          </div>`;
+      });
+      html += '</div>';
+    } else {
+      const textVal = userAnswer || '';
+      html += `
+        <input type="text" class="quiz-text-input" id="textAnswer" 
+          value="${textVal}" 
+          placeholder="Type your answer here..."
+          oninput="currentQuiz.handleUpdate('text', this.value)">`;
+    }
+
+    html += '</div>';
+    container.innerHTML = html;
+    if (onStateChange) onStateChange();
+  }
+
+  // NEW: Handle updates from UI
+  handleUpdate(type, data) {
+    if (type === 'select') {
+      this.userAnswers[this.currentQuestionIndex] = data;
+    } else if (type === 'text') {
+      this.userAnswers[this.currentQuestionIndex] = data;
+    } else if (type === 'match') {
+      if (!this.userAnswers[this.currentQuestionIndex]) {
+        this.userAnswers[this.currentQuestionIndex] = {};
+      }
+      if (data.value === "") {
+        delete this.userAnswers[this.currentQuestionIndex][data.pairIdx];
+      } else {
+        this.userAnswers[this.currentQuestionIndex][data.pairIdx] = parseInt(data.value);
+      }
+    } else if (type === 'arrange') {
+      if (!this.userAnswers[this.currentQuestionIndex]) {
+        this.userAnswers[this.currentQuestionIndex] = [];
+      }
+      const order = this.userAnswers[this.currentQuestionIndex];
+      const items = this.getCurrentQuestion().items;
+      
+      // Remove item if it already exists in the order
+      const existingIdx = order.indexOf(data.item);
+      if (existingIdx !== -1) order.splice(existingIdx, 1);
+      
+      if (data.pos !== "") {
+        const pos = parseInt(data.pos) - 1;
+        // If something else is at that position, remove it or shift? 
+        // For simplicity, just swap or replace.
+        const atPos = order[pos];
+        if (atPos) {
+          // Find where it should go... actually just let the user pick.
+          order[pos] = data.item;
+        } else {
+          order[pos] = data.item;
+        }
+      }
+      // Cleanup undefined holes
+      this.userAnswers[this.currentQuestionIndex] = order.filter(item => item !== undefined);
+    }
+    this.saveToStorage();
+    
+    // Minimal re-render for options to show selection
+    if (type === 'select') {
+      document.querySelectorAll('.quiz-option').forEach((el, i) => {
+        el.classList.toggle('selected', i === data);
+      });
+    }
   }
 }
 
