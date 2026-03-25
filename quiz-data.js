@@ -104,17 +104,19 @@ const S1_QUIZ = {
     },
     {
       id: 's1-q12',
-      type: 'fill-blank',
-      question: 'The consonant "त" sounds like the "t" in the English word __________.',
-      correctAnswer: ['tea', 'tap', 'table', 'tooth'],
-      explanation: 'त (ta) is a dental consonant pronounced like "t" in "tea" or "tap".'
+      type: 'mcq',
+      question: 'The consonant "त" sounds like the "t" in which English word?',
+      options: ['tap', 'think', 'this', 'she'],
+      correctAnswer: 0,
+      explanation: 'त (ta) is a dental consonant pronounced like "t" in "tap" or "tea".'
     },
     {
       id: 's1-q13',
-      type: 'fill-blank',
-      question: 'The long vowel "ऊ" sounds like "oo" in the word __________.',
-      correctAnswer: ['cool', 'tool', 'pool', 'moon'],
-      explanation: 'ऊ (uu) is pronounced like "oo" in "cool", "tool", or "pool".'
+      type: 'mcq',
+      question: 'The long vowel "ऊ" sounds like "oo" in which word?',
+      options: ['zoo', 'book', 'door', 'blood'],
+      correctAnswer: 0,
+      explanation: 'ऊ (uu) is a long vowel pronounced like "oo" in "zoo", "cool", or "pool".'
     },
 
     // Short Answer (3 questions)

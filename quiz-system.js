@@ -73,13 +73,23 @@ class QuizSystem {
       const s1 = normalize(str1);
       const s2 = normalize(str2);
       if (s1 === s2) return 1;
-      
-      let matches = 0;
-      const minLen = Math.min(s1.length, s2.length);
-      for (let i = 0; i < minLen; i++) {
-        if (s1[i] === s2[i]) matches++;
+      if (s1.length < 2 || s2.length < 2) return s1 === s2 ? 1 : 0;
+
+      const getBigrams = (s) => {
+        const bigrams = new Set();
+        for (let i = 0; i < s.length - 1; i++) {
+          bigrams.add(s.substring(i, i + 2));
+        }
+        return bigrams;
+      };
+
+      const b1 = getBigrams(s1);
+      const b2 = getBigrams(s2);
+      let intersection = 0;
+      for (let bigram of b1) {
+        if (b2.has(bigram)) intersection++;
       }
-      return matches / Math.max(s1.length, s2.length);
+      return (2 * intersection) / (b1.size + b2.size);
     };
 
     switch (question.type) {
