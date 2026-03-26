@@ -1162,6 +1162,14 @@ footer {
   function showResults() {
     const score = currentQuiz.completeQuiz();
     const pct = score.percentage;
+
+    // Mark as done in the main app's storage
+    const completed = JSON.parse(localStorage.getItem('nia_done') || '[]');
+    if (!completed.includes(currentQuiz.quizId)) {
+      completed.push(currentQuiz.quizId);
+      localStorage.setItem('nia_done', JSON.stringify(completed));
+    }
+
     const message = pct >= 80 ? '🎉 Excellent work!' : pct >= 60 ? '👏 Good job!' : '💪 Keep practicing!';
     const passed = pct >= 80 ? '✅ PASSED' : '⚠️ RETAKE RECOMMENDED';
     document.getElementById('resultScore').textContent = pct;
