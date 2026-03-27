@@ -3,7 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nia's Language Adventure 🌟</title>
+<title>Free Sanskrit &amp; Marathi Lessons for CBSE Class 5 | Vidya Vatika</title>
+<meta name="description" content="Free English-medium Sanskrit and Marathi lessons for CBSE Class 5. Learn Devanagari, grammar, vocabulary and Panchatantra stories — 79 structured video lessons and interactive quizzes. No login required.">
+<meta name="keywords" content="Sanskrit CBSE Class 5, learn Sanskrit in English, Marathi for kids, Devanagari script, free Sanskrit lessons, Vidya Vatika, Sanskrit grammar, Marathi grammar">
+<meta property="og:title" content="Free Sanskrit &amp; Marathi Lessons for CBSE | Vidya Vatika">
+<meta property="og:description" content="79 free English-medium video lessons, interactive guides and quizzes for Sanskrit and Marathi. CBSE Class 5. No login required.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#7C3AED">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -879,6 +887,82 @@ main {
   color: var(--teal);
   text-decoration: none;
 }
+
+/* === DAKSHINA PANEL === */
+.dakshina-panel {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 16px;
+  padding: 18px 20px;
+  max-width: 420px;
+  margin: 0 auto 14px;
+  text-align: center;
+}
+
+.dakshina-tabs {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.dtab {
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1.5px solid rgba(255,255,255,0.3);
+  background: transparent;
+  color: rgba(255,255,255,0.7);
+  font-family: 'Baloo 2', cursive;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.dtab.active {
+  background: var(--gold);
+  color: var(--dark);
+  border-color: var(--gold);
+}
+
+.dakshina-content {
+  color: rgba(255,255,255,0.85);
+  font-size: 0.85rem;
+}
+
+.dakshina-content img {
+  width: 160px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  border: 3px solid var(--gold);
+}
+
+.upi-id {
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 0.78rem;
+  margin-top: 6px;
+  display: inline-block;
+}
+
+.btn-kofi {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FF5E5B;
+  color: #fff;
+  padding: 10px 24px;
+  border-radius: 30px;
+  font-family: 'Baloo 2', cursive;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s;
+  margin-bottom: 8px;
+}
+
+.btn-kofi:hover { transform: translateY(-2px); opacity: 0.9; }
 </style>
 </head>
 <body>
@@ -1563,16 +1647,57 @@ renderAll();
     <a href="https://forms.gle/YOUR_GOOGLE_FORM_ID" target="_blank" rel="noopener noreferrer" class="btn-feedback">
       ⭐ Rate &amp; Give Feedback
     </a>
-    <a href="https://buymeacoffee.com/vidyavatika" target="_blank" rel="noopener noreferrer" class="btn-dakshina">
+    <button onclick="toggleDakshina()" class="btn-dakshina">
       🙏 Offer Dakshina
-    </a>
+    </button>
   </div>
+
+  <!-- Dakshina Panel -->
+  <div id="dakshinaPanel" class="dakshina-panel" style="display:none">
+    <div class="dakshina-tabs">
+      <button class="dtab active" id="dtab-india" onclick="showDakshina('india')">🇮ن India (UPI)</button>
+      <button class="dtab" id="dtab-intl" onclick="showDakshina('intl')">🌍 Outside India (Ko-fi)</button>
+    </div>
+    <div id="dakshina-india" class="dakshina-content">
+      <p style="margin-bottom:10px;">Scan with GPay, PhonePe, or Paytm</p>
+      <img src="assets/upi-qr-placeholder.png" alt="UPI QR Code" onerror="this.style.display='none';document.getElementById('upi-fallback').style.display='block'">
+      <div id="upi-fallback" style="display:none;padding:20px;background:rgba(255,255,255,0.1);border-radius:12px;">
+        <p style="font-size:0.8rem;opacity:0.7;">QR Code coming soon</p>
+      </div>
+      <p class="upi-id">📱 UPI ID: <strong>YOUR_UPI_ID@bank</strong></p>
+    </div>
+    <div id="dakshina-intl" class="dakshina-content" style="display:none">
+      <p style="margin-bottom:10px;">Support from outside India via Ko-fi</p>
+      <a href="https://ko-fi.com/vidyavatika" target="_blank" rel="noopener noreferrer" class="btn-kofi">☕ Support on Ko-fi</a>
+      <p style="font-size:0.75rem;opacity:0.6;">International payments via PayPal &amp; Credit Card</p>
+    </div>
+  </div>
+
   <div class="privacy-note">
     🔒 This app collects <strong>zero personal data</strong>. All progress is saved locally on your device only (localStorage). No cookies. No tracking. DPDP Act 2023 compliant.<br>
     Content is 100% original. Not affiliated with or endorsed by NCERT. &nbsp;|&nbsp;
     <a href="https://www.youtube.com/@VidyaVatika" target="_blank" rel="noopener noreferrer">Vidya Vatika © 2025</a>
   </div>
 </div>
+
+<script>
+function toggleDakshina() {
+  const p = document.getElementById('dakshinaPanel');
+  p.style.display = p.style.display === 'none' ? 'block' : 'none';
+}
+function showDakshina(mode) {
+  document.getElementById('dakshina-india').style.display = mode === 'india' ? 'block' : 'none';
+  document.getElementById('dakshina-intl').style.display = mode === 'intl' ? 'block' : 'none';
+  document.querySelectorAll('.dtab').forEach(t => t.classList.remove('active'));
+  document.getElementById('dtab-' + mode).classList.add('active');
+}
+// PWA Service Worker Registration
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
+</script>
 
 </body>
 </html>
