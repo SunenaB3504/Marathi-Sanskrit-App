@@ -230,56 +230,78 @@ header {
   transform: translateY(-1px);
 }
 
-.nav-tab .tab-emoji { font-size: 1.1rem; }
-
-/* === TRACK FOCUS BAR (UNIFIED DASHBOARD LOOK) === */
-.track-focus-bar {
-  background: #23114f;
-  padding: 10px 24px;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  position: sticky;
-  top: 68px; /* Responsive height */
-  z-index: 15;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.track-focus-bar::-webkit-scrollbar { display: none; }
-
-.focus-lbl {
-  color: rgba(255,255,255,0.3);
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-right: 2px;
-  white-space: nowrap;
-}
-
-.focus-btn {
-  padding: 7px 18px;
-  border-radius: 40px;
-  border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.05);
-  color: rgba(255,255,255,0.6);
-  font-family: 'Baloo 2', cursive;
-  font-size: 0.85rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.25s;
-  white-space: nowrap;
-  display: flex; align-items: center; gap: 7px;
-}
-
-.focus-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
-.focus-btn.active { border-color: currentColor; background: rgba(255,255,255,0.12); color: #fff; }
-
-.focus-btn[data-track="S"].active { color: var(--saffron); border-color: var(--saffron); }
-.focus-btn[data-track="M"].active { color: var(--teal); border-color: var(--teal); }
-.focus-btn[data-track="B"].active { color: var(--purple); border-color: var(--purple); }
 .focus-btn[data-track="all"].active { color: var(--gold); border-color: var(--gold); }
+
+/* === MOBILE MENU TRIGGER === */
+.mobile-menu-trigger {
+  display: none; /* Hidden on Desktop */
+  width: 44px; height: 44px;
+  background: rgba(255,255,255,0.06);
+  border: 1.5px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  align-items: center; justify-content: center;
+  font-size: 24px; color: #fff;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* === MOBILE NAV OVERLAY (ADVENTURE MAP) === */
+.mobile-nav-overlay {
+  display: none; /* Hidden until toggled */
+  position: fixed; inset: 0;
+  background: #11082d; /* Solid dark purple */
+  z-index: 1000;
+  flex-direction: column;
+  padding: 40px 24px;
+  animation: slideInMenu 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.mobile-nav-overlay.open { display: flex; }
+
+.overlay-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.overlay-title {
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.5rem; color: var(--gold);
+  font-weight: 800;
+}
+
+.close-overlay {
+  font-size: 36px; color: rgba(255,255,255,0.5);
+  line-height: 1;
+  cursor: pointer;
+}
+
+.overlay-menu {
+  display: flex; flex-direction: column; gap: 16px;
+  overflow-y: auto;
+}
+
+.overlay-item {
+  padding: 18px 24px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #fff;
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.2rem; font-weight: 700;
+  display: flex; align-items: center; gap: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.overlay-item:active { transform: scale(0.96); background: rgba(255,255,255,0.08); }
+.overlay-item.active { border-color: var(--gold); background: rgba(255,255,255,0.1); box-shadow: 0 8px 16px rgba(0,0,0,0.4); }
+
+@keyframes slideInMenu {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
 
 
 
@@ -890,15 +912,19 @@ main {
 }
 
 @media (max-width: 600px) {
-  .header-inner { padding: 20px 16px 16px; }
-  .header-text h1 { font-size: 1.4rem; }
-  .logo-circle { width: 54px; height: 54px; font-size: 26px; }
+  .header-inner { justify-content: space-between; align-items: center; }
+  .header-text h1 { font-size: 1.35rem; }
+  .logo-circle { width: 50px; height: 50px; font-size: 24px; }
   .header-stars { display: none; }
-  main { padding: 20px 14px 60px; }
+  .nav-tabs { display: none !important; } /* Hide the horizontal menu */
+  .mobile-menu-trigger { display: flex; } /* Show hamburger */
+  .track-focus-bar { top: 78px; padding: 10px 16px; margin-top: 0; }
+  main { padding: 18px 14px 60px; }
   .video-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
   .stat-cards { grid-template-columns: 1fr 1fr; }
   .modal-box { border-radius: 16px; }
 }
+
 
 @media (max-width: 400px) {
   .video-grid { grid-template-columns: 1fr; }
@@ -1251,7 +1277,10 @@ main {
       </a>
       <div class="star-badge">⭐ <span id="starCount">0</span> Stars</div>
     </div>
+    <div class="mobile-menu-trigger" onclick="toggleMobileMenu()">☰</div>
   </div>
+</header>
+
   <div class="progress-banner" style="padding-bottom:16px">
     <span class="progress-label">Overall Progress</span>
     <div class="progress-track">
@@ -1944,32 +1973,43 @@ function closeModalOnBg(e) {
 // =============================================
 // TABS
 // =============================================
-function showTab(name) {
-  document.querySelectorAll('.phase-section').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('sec-'+name).classList.add('active');
-  document.getElementById('tab-'+name).classList.add('active');
+function showTab(id) {
+  // Update state
+  currentFilter = id;
   
-  // Update Ad Keywords for context-aware monetization
-  const adKeywords = {
-    'home': 'Education, Learn Sanskrit, Learn Marathi, Class 5, Fun School',
-    'p1': 'Alphabet, Devanagari Script, Sanskrit Vowels, Marathi Sounds',
-    'p2': 'Vocabulary, Daily Words, Numbers in Sanskrit, Animal Names',
-    'p3': 'Grammar, Sentence Building, Verbs, Sanskrit Shlokas',
-    'p4': 'Panchatantra Stories, Folk Tales, Marathi Culture, Ethics',
-    'all': 'Language Course for Kids, Educational Videos'
-  };
-  
-  let kwMeta = document.querySelector('meta[name="ad-keywords"]');
-  if (!kwMeta) {
-    kwMeta = document.createElement('meta');
-    kwMeta.name = "ad-keywords";
-    document.head.appendChild(kwMeta);
+  // Update Tabs UI
+  document.querySelectorAll('.nav-tab').forEach(t => {
+    t.classList.toggle('active', t.id === 'tab-'+id);
+  });
+
+  // Update Overlay UI
+  document.querySelectorAll('.overlay-item').forEach(o => {
+    const targetId = o.getAttribute('onclick').match(/'(.*?)'/)[1];
+    o.classList.toggle('active', targetId === id);
+  });
+
+  // Sections toggle
+  document.querySelectorAll('.phase-section').forEach(s => {
+    s.classList.toggle('active', s.id === 'sec-'+id);
+  });
+
+  // Close Mobile Menu if open
+  const overlay = document.getElementById('mobileOverlay');
+  if(overlay && overlay.classList.contains('open')) {
+    toggleMobileMenu();
   }
-  kwMeta.content = adKeywords[name] || 'Educational Apps';
-  
-  if(name==='all') renderAllGrid();
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  renderAll();
 }
+
+function toggleMobileMenu() {
+  const overlay = document.getElementById('mobileOverlay');
+  const isOpen = overlay.classList.contains('open');
+  overlay.classList.toggle('open');
+  document.body.style.overflow = isOpen ? 'auto' : 'hidden'; // Prevent background scroll
+}
+
 
 // =============================================
 // FILTER + SEARCH
@@ -2132,5 +2172,25 @@ if ('serviceWorker' in navigator) {
 }
 </script>
 
+<!-- MOBILE NAV OVERLAY (ADVENTURE MAP) -->
+<div class="mobile-nav-overlay" id="mobileOverlay">
+  <div class="overlay-header">
+    <div class="overlay-title">🌟 Adventure Map</div>
+    <div class="close-overlay" onclick="toggleMobileMenu()">✕</div>
+  </div>
+  <div class="overlay-menu">
+    <div class="overlay-item active" onclick="showTab('home')">🏠 Home Base</div>
+    <div class="overlay-item" onclick="showTab('p1')">🔤 Phase 1: Alphabets</div>
+    <div class="overlay-item" onclick="showTab('p2')">📚 Phase 2: Vocabulary</div>
+    <div class="overlay-item" onclick="showTab('p3')">✍️ Phase 3: Grammar</div>
+    <div class="overlay-item" onclick="showTab('p4')">📖 Phase 4: Stories</div>
+    <div class="overlay-item" onclick="showTab('all')">🔍 Search Explorer</div>
+  </div>
+  <div style="margin-top:auto; padding-top:20px; border-top:1px solid rgba(255,255,255,0.1);">
+     <a href="#gardeners-call" onclick="toggleMobileMenu()" style="display:block; text-align:center; color:var(--gold); font-family:'Baloo 2',cursive; text-decoration:none; font-weight:700;">🌟 Support Our Mission</a>
+  </div>
+</div>
+
 </body>
 </html>
+
