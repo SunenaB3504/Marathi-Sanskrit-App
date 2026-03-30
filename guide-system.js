@@ -42,6 +42,7 @@ function initGuideQuiz(quizData) {
                         <div class="detail-row"><span>Status:</span><strong id="resultStatus">COMPLETED</strong></div>
                     </div>
                     <div class="result-buttons">
+                        <button id="shareBtn" class="result-btn share-btn hidden" style="background:var(--bridge-color, #7C3AED); color:white;">🔗 Share Achievement</button>
                         <button id="retakeBtn" class="result-btn">Retake Quiz</button>
                         <button id="exitBtn" class="result-btn secondary">Back to Guide</button>
                     </div>
@@ -82,6 +83,10 @@ function initGuideQuiz(quizData) {
     document.getElementById('retakeBtn').onclick = () => { 
         currentQuiz.resetQuiz(); 
         startQuiz(quizData); 
+    };
+
+    document.getElementById('shareBtn').onclick = () => {
+        shareAchievement(currentQuiz);
     };
 
     function startQuiz(data) {
@@ -159,8 +164,46 @@ function initGuideQuiz(quizData) {
         document.getElementById('resultMessage').textContent = message;
         document.getElementById('resultStatus').textContent = status;
         
+        // Show share button if score > 80%
+        const shareBtn = document.getElementById('shareBtn');
+        if (pct >= 80) {
+            shareBtn.classList.remove('hidden');
+        } else {
+            shareBtn.classList.add('hidden');
+        }
+
         document.getElementById('quizModal').classList.add('hidden');
         document.getElementById('resultsModal').classList.remove('hidden');
+    }
+
+    async function shareAchievement(quiz) {
+        const score = quiz.getTotalScore();
+        const shareData = {
+            title: 'I mastered a new phase in Vidya Vatika!',
+            text: `Nia just mastered a new phase in Vidya Vatika! Check out this private Sanskrit & Marathi adventure: ${window.location.href}`,
+            url: window.location.href
+        };
+
+        try {
+            if (navigator.share) {
+                await navigator.share(shareData);
+            } else {
+                // Fallback: Copy to clipboard
+                const textArea = document.createElement("textarea");
+                textArea.value = shareData.text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    alert('Achievement copied to clipboard! Share it with your friends.');
+                } catch (err) {
+                    console.error('Copy failed', err);
+                }
+                document.body.removeChild(textArea);
+            }
+        } catch (err) {
+            console.error('Share failed:', err);
+        }
     }
 
     function closeQuiz() {

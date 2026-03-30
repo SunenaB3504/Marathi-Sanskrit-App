@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="frame-ancestors 'none';">
 <title>Free Sanskrit &amp; Marathi Lessons for CBSE Class 5 | Vidya Vatika</title>
 <meta name="description" content="Free English-medium Sanskrit and Marathi lessons for CBSE Class 5. Learn Devanagari, grammar, vocabulary and Panchatantra stories — 79 structured video lessons and interactive quizzes. No login required.">
 <meta name="keywords" content="Sanskrit CBSE Class 5, learn Sanskrit in English, Marathi for kids, Devanagari script, free Sanskrit lessons, Vidya Vatika, Sanskrit grammar, Marathi grammar">
@@ -636,7 +637,7 @@ main {
 }
 
 .ad-container {
-  background: rgba(255,255,255,0.4);
+  background: #FFF8F0;
   border: 1px dashed #ddd;
   border-radius: 12px;
   padding: 10px;
@@ -914,6 +915,26 @@ main {
   margin-bottom: 14px;
 }
 
+/* === FOOTER GRID === */
+.banner-actions-grid {
+  display: flex;
+  gap: 16px;
+  max-width: 1000px;
+  margin: 0 auto 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.action-col {
+  flex: 1;
+  min-width: 140px;
+}
+
+.btn-share:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(124,58,237,0.45);
+}
+
 .btn-subscribe {
   display: inline-flex;
   align-items: center;
@@ -1072,6 +1093,7 @@ main {
   <div class="header-inner">
     <div class="logo-circle">🌟</div>
     <div class="header-text">
+       <div class="brand-platform" style="font-family:'Baloo 2',cursive;font-size:0.8rem;color:var(--gold);letter-spacing:1px;margin-bottom:2px;text-transform:uppercase;font-weight:700;">VIDYA VATIKA: THE GARDEN OF KNOWLEDGE</div>
       <h1>Nia's <span>Language</span> Adventure</h1>
       <p>Sanskrit · Marathi · Class 5 CBSE · 79 Videos & Guides</p>
     </div>
@@ -1802,26 +1824,40 @@ function confetti() {
 // =============================================
 renderAll();
 </script>
-<!-- ===== COMMUNITY FOOTER BANNER ===== -->
+<!-- ===== COMMUNITY FOOTER BANNER (THE GARDENER'S CALL) ===== -->
 <div class="community-banner">
-  <h3>🌟 Enjoying Nia's Language Adventure?</h3>
-  <p>Subscribe to <strong>Vidya Vatika</strong> on YouTube for new Sanskrit &amp; Marathi lessons every week!</p>
-  <div class="banner-actions">
-    <a href="https://www.youtube.com/@DataStoriesAI?sub_confirmation=1" target="_blank" rel="noopener noreferrer" class="btn-subscribe">
-      ▶ Subscribe on YouTube
-    </a>
-    <a href="https://www.youtube.com/@DataStoriesAI" target="_blank" rel="noopener noreferrer" class="btn-feedback">
-      💬 Comment on YouTube
-    </a>
-    <button onclick="toggleDakshina()" class="btn-dakshina">
-      🙏 Offer Dakshina
-    </button>
+  <div class="gardener-call-message" style="font-family:'Nunito',sans-serif;font-size:14px;color:rgba(255,255,255,0.9);text-align:center;max-width:850px;margin:0 auto 28px;line-height:1.6;">
+    <span style="display:block;font-family:'Baloo 2',cursive;font-size:1.4rem;color:var(--gold);margin-bottom:12px;">🌟 The Gardener's Call</span>
+    Vidya Vatika is a 'Garden of Knowledge' kept free and private for every student. Unlike other apps, we never track you, never ask for a login, and never sell your personal information. We rely on our community to keep this garden growing. Whether you Subscribe for updates, Share with a friend, Comment to join the talk, or offer Dakshina (Support)—every action helps keep this adventure safe and free for students everywhere.
+  </div>
+
+  <div class="banner-actions-grid">
+    <div class="action-col">
+      <a href="https://www.youtube.com/@DataStoriesAI?sub_confirmation=1" target="_blank" rel="noopener noreferrer" class="btn-subscribe" style="background:#FF0000;width:100%;justify-content:center;">
+        ▶ Subscribe
+      </a>
+    </div>
+    <div class="action-col">
+      <a href="https://www.youtube.com/@DataStoriesAI" target="_blank" rel="noopener noreferrer" class="btn-feedback" style="background:#FFB830;width:100%;justify-content:center;color:var(--dark);">
+        💬 Comment
+      </a>
+    </div>
+    <div class="action-col">
+      <button onclick="shareApp()" class="btn-share" style="background:var(--bridge-color, #7C3AED);color:#fff;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 22px;border-radius:30px;font-family:'Baloo 2',cursive;font-size:0.95rem;font-weight:700;border:none;cursor:pointer;box-shadow:0 4px 14px rgba(124,58,237,0.35);transition:all 0.3s;">
+        🔗 Share App
+      </button>
+    </div>
+    <div class="action-col">
+      <button onclick="toggleDakshina()" class="btn-dakshina" style="background:#FF6B1A;width:100%;justify-content:center;">
+        🙏 Offer Dakshina
+      </button>
+    </div>
   </div>
 
   <!-- Dakshina Panel -->
-  <div id="dakshinaPanel" class="dakshina-panel" style="display:none">
+  <div id="dakshinaPanel" class="dakshina-panel" style="display:none;margin-top:24px;">
     <div class="dakshina-tabs">
-      <button class="dtab active" id="dtab-india" onclick="showDakshina('india')">🇮ن India (UPI)</button>
+      <button class="dtab active" id="dtab-india" onclick="showDakshina('india')">🇮ন India (UPI)</button>
       <button class="dtab" id="dtab-intl" onclick="showDakshina('intl')">🌍 Outside India (Ko-fi)</button>
     </div>
     <div id="dakshina-india" class="dakshina-content">
@@ -1839,17 +1875,41 @@ renderAll();
     </div>
   </div>
 
-  <div class="privacy-note">
-    🔒 This app collects <strong>zero personal data</strong>. All progress is saved locally on your device only (localStorage). No cookies. No tracking. DPDP Act 2023 compliant.<br>
-    Content is 100% original. Not affiliated with or endorsed by NCERT. &nbsp;|&nbsp;
-    <a href="https://www.youtube.com/@DataStoriesAI" target="_blank" rel="noopener noreferrer">Data Stories AI — Vidya Vatika © 2025</a>
+  <div class="privacy-note" style="border-top:1px solid rgba(255,255,255,0.1);padding-top:18px;">
+    🔒 This app collects <strong>zero personal data</strong>. Progress is saved locally via localStorage. DPDP Act 2023 compliant.<br>
+    © 2026 Suncube-AI. Licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" style="color:var(--teal)">CC BY-NC-ND 4.0</a>. &nbsp;|&nbsp;
+    <a href="https://www.youtube.com/@DataStoriesAI" target="_blank" rel="noopener noreferrer">Data Stories AI — Vidya Vatika</a>
   </div>
 </div>
 
 <script>
+// Web Share API implementation
+async function shareApp() {
+  const shareData = {
+    title: 'Nia\'s Language Adventure | Vidya Vatika',
+    text: 'Check out this private Sanskrit & Marathi adventure for kids! Zero tracking, zero data collection.',
+    url: window.location.href
+  };
+  try {
+    if (navigator.share) {
+      await navigator.share(shareData);
+    } else {
+      // Fallback for non-supporting browsers
+      const dummyInp = document.createElement('input');
+      document.body.appendChild(dummyInp);
+      dummyInp.value = window.location.href;
+      dummyInp.select();
+      document.execCommand('copy');
+      document.body.removeChild(dummyInp);
+      alert('App link copied to clipboard! Share it with your friends.');
+    }
+  } catch(err) { console.error('Share failed:', err); }
+}
+
 function toggleDakshina() {
   const p = document.getElementById('dakshinaPanel');
   p.style.display = p.style.display === 'none' ? 'block' : 'none';
+  if(p.style.display==='block') p.scrollIntoView({behavior:'smooth'});
 }
 function showDakshina(mode) {
   document.getElementById('dakshina-india').style.display = mode === 'india' ? 'block' : 'none';
@@ -1857,6 +1917,11 @@ function showDakshina(mode) {
   document.querySelectorAll('.dtab').forEach(t => t.classList.remove('active'));
   document.getElementById('dtab-' + mode).classList.add('active');
 }
+// AdSense COPPA Compliance (tfcd: 1)
+(window.adsbygoogle = window.adsbygoogle || []).push({
+  params: { "tfcd": "1" }
+});
+
 // PWA Service Worker Registration
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
