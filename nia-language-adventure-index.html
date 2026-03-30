@@ -183,44 +183,57 @@ header {
   white-space: nowrap;
 }
 
-/* === NAV TABS === */
-.nav-tabs {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  background: var(--dark);
-  padding: 0 24px;
+.nav-tab .tab-emoji { font-size: 1.1rem; }
+
+/* === TRACK FOCUS BAR === */
+.track-focus-bar {
+  background: #2D1A5E;
+  padding: 8px 24px;
   display: flex;
-  gap: 4px;
+  gap: 12px;
+  align-items: center;
+  position: sticky;
+  top: 54px; /* Below nav-tabs */
+  z-index: 15;
+  border-bottom: 1px solid rgba(255,184,48,0.15);
   overflow-x: auto;
   scrollbar-width: none;
-  -ms-overflow-style: none;
 }
-.nav-tabs::-webkit-scrollbar { display: none; }
+.track-focus-bar::-webkit-scrollbar { display: none; }
 
-.nav-tab {
-  padding: 14px 20px;
-  border: none;
-  background: transparent;
-  color: rgba(255,255,255,0.5);
+.focus-lbl {
+  color: rgba(255,255,255,0.4);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-right: 4px;
+  white-space: nowrap;
+}
+
+.focus-btn {
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1.5px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.6);
   font-family: 'Baloo 2', cursive;
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-size: 0.85rem;
+  font-weight: 700;
   cursor: pointer;
-  border-bottom: 3px solid transparent;
   transition: all 0.2s;
   white-space: nowrap;
-  display: flex; align-items: center; gap: 8px;
+  display: flex; align-items: center; gap: 6px;
 }
 
-.nav-tab:hover { color: rgba(255,255,255,0.85); }
+.focus-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
+.focus-btn.active { border-color: currentColor; background: rgba(255,255,255,0.1); color: #fff; }
 
-.nav-tab.active {
-  color: #fff;
-  border-bottom-color: var(--gold);
-}
+.focus-btn[data-track="S"].active { color: var(--saffron); border-color: var(--saffron); }
+.focus-btn[data-track="M"].active { color: var(--teal); border-color: var(--teal); }
+.focus-btn[data-track="B"].active { color: var(--purple); border-color: var(--purple); }
+.focus-btn[data-track="all"].active { color: var(--gold); border-color: var(--gold); }
 
-.nav-tab .tab-emoji { font-size: 1.1rem; }
 
 /* === MAIN CONTENT === */
 main {
@@ -1210,6 +1223,16 @@ main {
   </button>
 </nav>
 
+<!-- TRACK FOCUS BAR -->
+<div class="track-focus-bar" id="trackFocusBar">
+  <span class="focus-lbl">Language Focus:</span>
+  <button class="focus-btn" data-track="all" onclick="setTrackFocus('all')">🌈 All</button>
+  <button class="focus-btn" data-track="S" onclick="setTrackFocus('S')">🪷 Sanskrit</button>
+  <button class="focus-btn" data-track="M" onclick="setTrackFocus('M')">🌿 Marathi</button>
+  <button class="focus-btn" data-track="B" onclick="setTrackFocus('B')">🌉 Bridge</button>
+</div>
+
+
 <!-- MAIN -->
 <main>
   <!-- REVENUE OPTIMIZATION: Top Leaderboard (Above the Fold) -->
@@ -1576,8 +1599,10 @@ const VIDEOS = [
 // =============================================
 let completed = JSON.parse(localStorage.getItem('nia_done') || '[]');
 let ytLinks   = JSON.parse(localStorage.getItem('nia_yt')   || '{}');
+let currentTrackFocus = localStorage.getItem('nia_track_focus') || 'all';
 let currentVideo = null;
 let currentFilter = 'all';
+
 
 // Merge saved YT links into VIDEOS
 VIDEOS.forEach(v => { if (ytLinks[v.id]) v.yt = ytLinks[v.id]; });
@@ -1664,19 +1689,36 @@ function thumbGrad(t) {
 }
 
 function renderAll() {
+  // Update Focus Buttons UI
+  document.querySelectorAll('.focus-btn').forEach(b => {
+    b.classList.toggle('active', b.getAttribute('data-track') === currentTrackFocus);
+  });
+
   // Phase grids
   const phases = [1,2,3,4];
   const tracks = ['S','M','B'];
   phases.forEach(p => {
     tracks.forEach(t => {
-      const el = document.getElementById(`grid-p${p}-${t.toLowerCase()}`);
+      const gridId = `grid-p${p}-${t.toLowerCase()}`;
+      const el = document.getElementById(gridId);
+      const label = el?.previousElementSibling; // The track-label
+      
       if(!el) return;
-      const vids = VIDEOS.filter(v=>v.phase===p && v.track===t);
-      el.innerHTML = vids.map(v=>makeCard(v)).join('') ||
-        `<div class="add-video-hint" style="grid-column:1/-1">
-          No ${trackLabel(t)} videos in Phase ${p} yet.
-          Add a YouTube link using the input on any card!
-        </div>`;
+
+      // Filter logic
+      const isVisible = currentTrackFocus === 'all' || currentTrackFocus === t;
+      el.style.display = isVisible ? 'grid' : 'none';
+      if(label && label.classList.contains('track-label')) {
+        label.style.display = isVisible ? 'flex' : 'none';
+      }
+
+      if(isVisible) {
+        const vids = VIDEOS.filter(v=>v.phase===p && v.track===t);
+        el.innerHTML = vids.map(v=>makeCard(v)).join('') ||
+          `<div class="add-video-hint" style="grid-column:1/-1">
+            No ${trackLabel(t)} videos in Phase ${p} yet.
+          </div>`;
+      }
     });
   });
 
@@ -1689,6 +1731,13 @@ function renderAll() {
   // Stats + progress
   updateStats();
 }
+
+function setTrackFocus(t) {
+  currentTrackFocus = t;
+  localStorage.setItem('nia_track_focus', t);
+  renderAll();
+}
+
 
 function renderAllGrid() {
   const q = document.getElementById('searchBox')?.value.toLowerCase()||'';
