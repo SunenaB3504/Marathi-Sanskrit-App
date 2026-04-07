@@ -4,7 +4,7 @@
 **Report Date**: March 27, 2026 (Revised)
 **Reviewed By**: AI Code Analysis
 **Documents Compared**:
-- App: `nia-language-adventure-index.html` + supporting files
+- App: `index.html` + supporting files
 - Plan: `docs/Vidya_Upavan_Business_Plan_2025.docx`
 
 ---
@@ -226,3 +226,4 @@ Based on the current state of WordPress (March 2026) — with Phase 1 & 2 video 
 ---
 
 *Report revised March 27, 2026. Incorporates compliance framework for DPDP 2023, COPPA, Copyright, and GST.*
+

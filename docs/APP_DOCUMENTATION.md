@@ -112,7 +112,7 @@ A central hub for tracking Nia's progress:
 ### Managing Video Links
 Developers or technically proficient users can update video links in two ways:
 1.  **Frontend**: Click on any card in the "All Videos" tab and paste a YouTube ID (`zugOABVMq1A`).
-2.  **Codebase**: Update the `yt` field in the `VIDEOS` array within `nia-language-adventure-index.html`.
+2.  **Codebase**: Update the `yt` field in the `VIDEOS` array within `index.html`.
 
 ### Adding New Questions
 Quizzes are updated via `quiz-data.js`. Each object follows a strict structure:
@@ -137,3 +137,4 @@ Nia's Language Adventure is more than just a video player; it is a **Structured 
 
 **Last Updated**: March 2026
 **Documentation Version**: 2.1
+

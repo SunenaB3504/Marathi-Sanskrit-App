@@ -5,7 +5,7 @@
 const CACHE_NAME = 'vidyaupavan-v1';
 const ASSETS_TO_CACHE = [
   'index.html',
-  'nia-language-adventure-index.html',
+  'index.html',
   'quiz-system.js',
   'quiz-data.js',
   's1-guide.html',
@@ -54,6 +54,7 @@ self.addEventListener('fetch', event => {
         caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
         return response;
       });
-    }).catch(() => caches.match('nia-language-adventure-index.html'))
+    }).catch(() => caches.match('index.html'))
   );
 });
+

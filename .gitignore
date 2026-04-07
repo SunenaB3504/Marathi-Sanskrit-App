@@ -23,3 +23,8 @@ node_modules/
 # Project-specific ignores
 docs/vidya_vatika_voice_scripts.md
 
+# Local or generated files
+Editied videos/
+docs/archive/
+*.docx
+

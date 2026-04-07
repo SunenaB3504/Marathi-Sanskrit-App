@@ -29,7 +29,7 @@ Copy and paste the following template into the description box. The first 125 ch
 Learn [Language] easily! Today we explore [Topic in English] ([Topic in Native Script]) step-by-step for Class 5 students.
 
 ✅ Take the Quiz & track progress in the Private Vidya Upavan App:
-https://sunenab3504.github.io/Marathi-Sanskrit-App/nia-language-adventure-index.html
+https://sunenab3504.github.io/Vidya-Upavan/
 
 ⏱️ Chapters:
 0:00 - Introduction to [Topic]
@@ -103,7 +103,7 @@ If you wish to automate this process, run the following JavaScript function in y
  * @param {string} track - The language track (e.g., "Sanskrit" or "Marathi")
  * @param {string} appUrl - Link to the app
  */
-function generateYouTubeMetadata(topicEnglish, topicNative, track, appUrl = "https://sunenab3504.github.io/Marathi-Sanskrit-App/nia-language-adventure-index.html") {
+function generateYouTubeMetadata(topicEnglish, topicNative, track, appUrl = "https://sunenab3504.github.io/Vidya-Upavan/") {
     
     // 1. Title Generation
     const title = `${topicEnglish} | ${topicNative} | Class 5 CBSE/ICSE | Vidya Upavan`;
@@ -151,3 +151,4 @@ Ko-fi: https://ko-fi.com/datastoriesai (Global)`;
 // Example Execution:
 // generateYouTubeMetadata("Daily Marathi Words", "रोजचे शब्द", "Marathi");
 ```
+

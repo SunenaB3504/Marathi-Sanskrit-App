@@ -6,7 +6,7 @@ This document is intended for developers or advanced users who wish to maintain 
 
 ## 🏗️ 1. File Structure & Responsibilities
 
-- **`nia-language-adventure-index.html`**: The beating heart of the app. It handles the dashboard, progress bars, video player modal, and search logic.
+- **`index.html`**: The beating heart of the app. It handles the dashboard, progress bars, video player modal, and search logic.
 - **`quiz-system.js`**: The functional engine. It is a class-based system that handles all quiz logic (rendering, scoring, validation, storage).
 - **`quiz-data.js`**: The content database. It contains the large objects for all 8 quizzes (`S1_QUIZ`, `M1_QUIZ`, etc.).
 - **`s1-guide.html` (to `m4-guide.html`)**: The individual content pages. They host the interactive lessons and provide the container for the `QuizSystem` class to render.
@@ -73,3 +73,4 @@ To add a **Phase 5 (Advanced Literature)**:
 2. Create `s5-guide.html` and `m5-guide.html` using the existing templates.
 3. Add `S5_QUIZ` and `M5_QUIZ` to `quiz-data.js`.
 4. The dashboard statistics will automatically update to include the new items in the global total.
+

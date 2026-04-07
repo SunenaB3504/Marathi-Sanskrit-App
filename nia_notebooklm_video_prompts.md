@@ -25,6 +25,21 @@
 
 ---
 
+#### S1-01 · Why Sanskrit
+
+---
+
+You are creating a special motivational educational video for a curious 10-year-old Indian girl named Nia, who is a strong English speaker studying in Class 5 CBSE India. Tone should be warm, enthusiastic, and inspiring. 
+
+Please structure the video around these key facts:
+1. Sanskrit-origin English words: Reveal that words like Yoga (योग), Avatar (अवतार), Jungle (जङ्गल), Sugar (शर्करा→sukkar→sugar), Orange (नारङ्ग→naranja→orange), Shampoo (चम्पू = head massage), Pundit (पण्डित), Loot (लुण्ट), Candy (खण्ड = piece of sugar), Cash (कर्ष = coin weight unit), Pepper (पिप्पलि→piper→pepper), and Sandalwood (chandana→santalon) come from Sanskrit.
+2. Sanskrit history: Mention Rigveda (~1500 BCE), Pāṇini's Ashtadhyayi (~400 BCE, 3,959 rules), the 1985 Rick Briggs NASA paper on AI, Zero by Brahmagupta (628 CE), Pi by Aryabhata (499 CE), Panchatantra's global translation journey, and Kalidasa's Abhijnanasakuntalam (translated 1789).
+3. CBSE exam facts: Explain that Sanskrit is a Class 6–10 third language option, highly scoring, rule-based, and makes learning Hindi, English grammar, and Biology terminology much easier.
+4. Etymology: Explain Mumbai (Mumbā Devī) and Maharashtra (Maha + Rashtra). Mention Mattur village where Sanskrit is spoken daily.
+5. Famous names decoded: Arjuna (bright/clear), Krishna (dark/all-attractive), Rama (one who gives joy), Saraswati (she who flows).
+
+---
+
 #### S1-01 · Sanskrit Introduction & The Devanagari Story
 
 ```

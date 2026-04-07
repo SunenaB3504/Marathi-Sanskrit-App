@@ -124,8 +124,9 @@
 
 ## After Creating
 1. Click **Share** → **Shorten URL** → Copy the `forms.gle/XXXXX` link
-2. Paste it into `nia-language-adventure-index.html` in the feedback button:
+2. Paste it into `index.html` in the feedback button:
    ```
    href="https://forms.gle/YOUR_ACTUAL_ID_HERE"
    ```
 3. Commit and push to GitHub
+

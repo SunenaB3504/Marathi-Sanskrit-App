@@ -22,7 +22,7 @@ Before applying, confirm:
 
 1. Go to [adsense.google.com](https://adsense.google.com)
 2. Sign in with the **same Gmail** as the YouTube channel
-3. Enter the website URL: `https://sunenab3504.github.io/Marathi-Sanskrit-App/nia-language-adventure-index.html`
+3. Enter the website URL: `https://sunenab3504.github.io/Vidya-Upavan/`
 4. Select **India** as country
 5. Accept AdSense Terms
 6. Submit — Google will review and approve (typically 2–4 weeks)
@@ -33,7 +33,7 @@ Before applying, confirm:
 
 Once approved, Google provides a **Publisher ID** like `ca-pub-XXXXXXXXXXXXXXXX`.
 
-Add the following to `<head>` in `nia-language-adventure-index.html`:
+Add the following to `<head>` in `index.html`:
 
 ```html
 <!-- Google AdSense — DPDP/COPPA Compliant (Non-Personalized Ads) -->
@@ -140,3 +140,4 @@ Google withholds **24–30% tax** on ad earnings if this form isn't submitted.
 - [ ] W-8BEN form submitted in AdSense payment settings
 - [ ] Indian bank account added to AdSense payments
 - [ ] Committed and pushed to GitHub
+
